@@ -1,0 +1,846 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AC River U13 Schedule</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Libre+Franklin:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#f5f3ee; --surface:#ffffff; --surface-2:#eeece4;
+    --ink:#1a2133; --muted:#5b6274;
+    --navy:#182a4d; --navy-2:#24406f;
+    --red:#b93b34;
+    --gold:#a8701e; --gold-bg:#f7ecd8; --gold-line:#e3cd9c;
+    --line:#e2ded2;
+    --shadow: 0 1px 2px rgba(24,30,50,0.04), 0 8px 24px -12px rgba(24,30,50,0.12);
+    --home-bg:#eaf0f6; --home-line:#c9d9ea; --home-ink:#1c4a7a;
+    --ok-bg:#e9f4ea; --ok-line:#bfdec4; --ok-ink:#276437;
+    --err-bg:#fbeceb; --err-line:#f0c4c0; --err-ink:#9a3229;
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --bg:#11151f; --surface:#181d2b; --surface-2:#1f2536;
+      --ink:#e9ebf2; --muted:#9aa2b8;
+      --navy:#8fb0ea; --navy-2:#a9c4f4;
+      --red:#e2776e;
+      --gold:#e0ac5c; --gold-bg:#2c2517; --gold-line:#4a3c22;
+      --line:#2a3247;
+      --shadow: 0 1px 2px rgba(0,0,0,0.3), 0 8px 24px -12px rgba(0,0,0,0.5);
+      --home-bg:#182838; --home-line:#2b4966; --home-ink:#9cc4ee;
+      --ok-bg:#182a1e; --ok-line:#2e4c37; --ok-ink:#8fd39e;
+      --err-bg:#2c1a19; --err-line:#4c2b28; --err-ink:#e8a29b;
+    }
+  }
+  :root[data-theme="dark"]{
+    --bg:#11151f; --surface:#181d2b; --surface-2:#1f2536;
+    --ink:#e9ebf2; --muted:#9aa2b8;
+    --navy:#8fb0ea; --navy-2:#a9c4f4;
+    --red:#e2776e;
+    --gold:#e0ac5c; --gold-bg:#2c2517; --gold-line:#4a3c22;
+    --line:#2a3247;
+    --shadow: 0 1px 2px rgba(0,0,0,0.3), 0 8px 24px -12px rgba(0,0,0,0.5);
+    --home-bg:#182838; --home-line:#2b4966; --home-ink:#9cc4ee;
+    --ok-bg:#182a1e; --ok-line:#2e4c37; --ok-ink:#8fd39e;
+    --err-bg:#2c1a19; --err-line:#4c2b28; --err-ink:#e8a29b;
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    background:var(--bg); color:var(--ink);
+    font-family:"Libre Franklin", ui-sans-serif, system-ui, sans-serif;
+    font-variant-numeric: tabular-nums;
+    -webkit-font-smoothing:antialiased;
+    min-height:100vh;
+  }
+  .wrap{ max-width:760px; margin:0 auto; padding:28px 18px 96px; }
+  header.top{ display:flex; flex-direction:column; gap:6px; margin-bottom:22px; }
+  .crest-row{ display:flex; align-items:center; gap:12px; justify-content:space-between; }
+  .crest-id{ display:flex; align-items:center; gap:12px; }
+  .crest{
+    width:44px;height:44px;border-radius:10px;
+    background:linear-gradient(160deg, var(--navy), var(--navy-2));
+    display:flex;align-items:center;justify-content:center;
+    color:#fff;font-family:"Oswald",sans-serif;font-weight:600;font-size:15px;
+    flex:none; box-shadow:var(--shadow);
+  }
+  h1{
+    font-family:"Oswald", ui-sans-serif, sans-serif; font-weight:600;
+    font-size:clamp(24px,5vw,32px); margin:0; text-wrap:balance; color:var(--ink);
+  }
+  .subtitle{ color:var(--muted); font-size:14.5px; margin:0; }
+  .meta-line{ color:var(--muted); font-size:12.5px; margin-top:10px; line-height:1.5; }
+  .icon-btn{
+    appearance:none; border:1px solid var(--line); background:var(--surface);
+    color:var(--muted); width:38px; height:38px; border-radius:10px;
+    display:flex; align-items:center; justify-content:center; cursor:pointer;
+    flex:none; transition:all .15s ease;
+  }
+  .icon-btn:hover{ color:var(--ink); border-color:var(--navy-2); }
+  .icon-btn.active{ background:var(--navy); border-color:var(--navy); color:#fff; }
+  .next-card{
+    margin-top:18px; background:var(--surface); border:1px solid var(--line);
+    border-radius:16px; padding:16px 18px; box-shadow:var(--shadow); display:none;
+  }
+  .next-card.show{display:block;}
+  .next-label{
+    font-family:"Oswald",sans-serif; text-transform:uppercase; letter-spacing:0.12em;
+    font-size:11px; color:var(--red); font-weight:600; margin-bottom:6px;
+  }
+  .next-body{ display:flex; align-items:baseline; justify-content:space-between; gap:12px; flex-wrap:wrap; }
+  .next-teams{ font-family:"Oswald",sans-serif; font-size:19px; font-weight:500; color:var(--ink); }
+  .next-when{ color:var(--muted); font-size:13.5px; }
+  .toolbar{ display:flex; gap:8px; flex-wrap:wrap; margin:22px 0 8px; align-items:center; justify-content:space-between; }
+  .filters{ display:flex; gap:8px; flex-wrap:wrap; }
+  .chip{
+    appearance:none; border:1px solid var(--line); background:var(--surface); color:var(--muted);
+    padding:7px 14px; border-radius:999px; font-family:"Libre Franklin", sans-serif;
+    font-size:13px; font-weight:600; cursor:pointer; transition:all 0.15s ease;
+  }
+  .chip:hover{border-color:var(--navy-2);}
+  .chip.active{ background:var(--navy); border-color:var(--navy); color:#fff; }
+  .chip .count{ opacity:0.7; font-weight:500; margin-left:3px; }
+  .ghost-btn{
+    appearance:none; border:1px dashed var(--line); background:transparent; color:var(--muted);
+    padding:7px 12px; border-radius:10px; font-family:"Libre Franklin", sans-serif;
+    font-size:12.5px; font-weight:600; cursor:pointer;
+  }
+  .ghost-btn:hover{ color:var(--ink); border-color:var(--navy-2); }
+  .month-heading{
+    font-family:"Oswald",sans-serif; font-size:13px; text-transform:uppercase; letter-spacing:0.14em;
+    color:var(--muted); margin:28px 2px 10px; padding-bottom:8px; border-bottom:1px solid var(--line);
+  }
+  .month-heading:first-of-type{margin-top:20px;}
+  .match{
+    display:grid; grid-template-columns:56px 1fr auto; gap:14px; align-items:center;
+    background:var(--surface); border:1px solid var(--line); border-radius:14px;
+    padding:13px 14px; margin-bottom:10px; box-shadow:var(--shadow);
+  }
+  .datebox{ text-align:center; line-height:1.05; }
+  .datebox .dow{ font-size:10.5px; text-transform:uppercase; letter-spacing:0.06em; color:var(--muted); font-weight:600; }
+  .datebox .day{ font-family:"Oswald",sans-serif; font-size:24px; font-weight:600; color:var(--ink); }
+  .datebox .mon{ font-size:10.5px; text-transform:uppercase; letter-spacing:0.06em; color:var(--muted); }
+  .info .teams{ font-size:15.5px; font-weight:600; color:var(--ink); display:flex; align-items:center; gap:8px; flex-wrap:wrap; }
+  .tag{
+    font-family:"Oswald",sans-serif; font-size:10.5px; font-weight:600; letter-spacing:0.06em;
+    padding:2px 7px; border-radius:5px; text-transform:uppercase;
+  }
+  .tag.home{background:var(--home-bg);color:var(--home-ink);border:1px solid var(--home-line);}
+  .tag.away{background:var(--surface-2);color:var(--muted);border:1px solid var(--line);}
+  .tag.travel{background:var(--gold-bg);color:var(--gold);border:1px solid var(--gold-line);}
+  .info .sub{ margin-top:5px; font-size:13px; color:var(--muted); display:flex; flex-wrap:wrap; gap:2px 8px; }
+  .info .sub .dot{opacity:0.5;}
+  .info .addr{ margin-top:3px; font-size:12px; }
+  .info .addr a{ color:var(--muted); text-decoration:underline; text-decoration-color:var(--line); text-underline-offset:2px; }
+  .info .addr a:hover{ color:var(--navy-2); text-decoration-color:var(--navy-2); }
+  .side{ text-align:right; display:flex; flex-direction:column; align-items:flex-end; gap:4px; }
+  .time{ font-weight:700; font-size:14px; color:var(--ink); white-space:nowrap; }
+  .mid{ font-size:11px; color:var(--muted); white-space:nowrap; }
+  .score-badge{
+    font-family:"Oswald",sans-serif; font-size:13px; font-weight:600; letter-spacing:0.02em;
+    padding:2px 9px; border-radius:6px; white-space:nowrap;
+  }
+  .score-badge.win{ background:var(--ok-bg); color:var(--ok-ink); border:1px solid var(--ok-line); }
+  .score-badge.loss{ background:var(--err-bg); color:var(--err-ink); border:1px solid var(--err-line); }
+  .score-badge.draw{ background:var(--surface-2); color:var(--muted); border:1px solid var(--line); }
+  .empty{ text-align:center; color:var(--muted); padding:40px 0; font-size:14px; display:none; }
+  .empty.show{display:block;}
+  footer{
+    margin-top:36px; padding-top:16px; border-top:1px solid var(--line);
+    color:var(--muted); font-size:12.5px; line-height:1.6;
+  }
+  .edit-card{
+    background:var(--surface); border:1px solid var(--line); border-radius:14px;
+    padding:14px; margin-bottom:10px; box-shadow:var(--shadow);
+  }
+  .edit-grid{ display:grid; grid-template-columns:1fr 1fr; gap:10px 12px; }
+  .edit-grid .full{ grid-column:1 / -1; }
+  .field{ display:flex; flex-direction:column; gap:4px; }
+  .field label{ font-size:11px; font-weight:600; text-transform:uppercase; letter-spacing:0.05em; color:var(--muted); }
+  .field input, .field select{
+    font:inherit; font-size:14px; padding:8px 10px; border-radius:8px;
+    border:1px solid var(--line); background:var(--bg); color:var(--ink);
+  }
+  .field input:focus, .field select:focus{ outline:2px solid var(--navy-2); outline-offset:1px; }
+  .edit-row-actions{ display:flex; justify-content:space-between; align-items:center; margin-top:10px; }
+  .id-badge{ font-size:11px; color:var(--muted); }
+  .remove-btn{
+    appearance:none; border:1px solid var(--err-line); background:var(--err-bg); color:var(--err-ink);
+    padding:6px 11px; border-radius:8px; font-size:12.5px; font-weight:600; cursor:pointer;
+  }
+  .remove-btn:hover{ filter:brightness(0.96); }
+  .add-card{
+    border:1px dashed var(--line); border-radius:14px; padding:14px;
+    display:flex; align-items:center; justify-content:center; margin-bottom:14px;
+    color:var(--muted); font-size:13.5px; font-weight:600; cursor:pointer; background:transparent;
+    width:100%; font-family:inherit;
+  }
+  .add-card:hover{ border-color:var(--navy-2); color:var(--ink); }
+  .save-bar{
+    position:fixed; left:0; right:0; bottom:0; z-index:20;
+    background:var(--surface); border-top:1px solid var(--line);
+    box-shadow:0 -8px 24px -12px rgba(24,30,50,0.18);
+    padding:12px 18px; display:none; align-items:center; justify-content:center;
+  }
+  .save-bar.show{ display:flex; }
+  .save-bar-inner{
+    max-width:760px; width:100%; display:flex; align-items:center; justify-content:space-between; gap:12px; flex-wrap:wrap;
+  }
+  .save-status{ font-size:12.5px; color:var(--muted); }
+  .save-status.err{ color:var(--err-ink); }
+  .save-status.ok{ color:var(--ok-ink); }
+  .btn-row{ display:flex; gap:8px; }
+  .btn{
+    appearance:none; border-radius:10px; padding:9px 16px; font-size:13.5px; font-weight:700;
+    cursor:pointer; font-family:"Libre Franklin",sans-serif;
+  }
+  .btn.primary{ background:var(--navy); border:1px solid var(--navy); color:#fff; }
+  .btn.primary:disabled{ opacity:0.5; cursor:default; }
+  .btn.secondary{ background:transparent; border:1px solid var(--line); color:var(--muted); }
+  .notice{
+    border-radius:12px; padding:10px 14px; font-size:13px; margin-bottom:14px;
+    border:1px solid var(--line); background:var(--surface-2); color:var(--muted);
+  }
+  @media (max-width:420px){
+    .match{grid-template-columns:48px 1fr auto; padding:12px 10px; gap:10px;}
+    .datebox .day{font-size:21px;}
+    .next-body{flex-direction:column; align-items:flex-start;}
+    .edit-grid{ grid-template-columns:1fr; }
+  }
+</style>
+<body>
+<div id="app"></div>
+<script>
+var MATCHES_DATA = [{"id":26430,"opponent":"Austin FC","homeAway":"away","date":"2026-09-12","time":"10:00 AM","tz":"CDT","location":"St. David's Performance Center – Field 4","city":"Austin, TX","outOfState":false,"address":"5300 Hudson Bend Rd, Austin, TX 78734","scoreFor":null,"scoreAgainst":null},{"id":26862,"opponent":"GFI Academy","homeAway":"home","date":"2026-09-19","time":"2:00 PM","tz":"CDT","location":"Soccer Central - Field #2","city":"Home Field","outOfState":false,"address":"301 Soccer Way, Round Rock, TX 78664","scoreFor":null,"scoreAgainst":null},{"id":27300,"opponent":"Houston Rangers","homeAway":"home","date":"2026-09-26","time":"12:00 PM","tz":"CDT","location":"Soccer Central - Field #2","city":"Home Field","outOfState":false,"address":"301 Soccer Way, Round Rock, TX 78664","scoreFor":null,"scoreAgainst":null},{"id":33814,"opponent":"Capital City SC","homeAway":"away","date":"2026-09-27","time":"3:00 PM","tz":"CDT","location":"1849 Park - Field #2","city":"Texas","outOfState":false,"address":"1849 Ranch Rd 620 S, Austin, TX 78734","scoreFor":null,"scoreAgainst":null},{"id":28279,"opponent":"FC Dallas","homeAway":"away","date":"2026-10-03","time":"3:00 PM","tz":"CDT","location":"Toyota Soccer Center - Field 7","city":"Frisco, TX","outOfState":false,"address":"8207 Kaci Ln, Frisco, TX 75034","scoreFor":null,"scoreAgainst":null},{"id":33180,"opponent":"ALBION SC Colorado","homeAway":"away","date":"2026-10-18","time":"10:00 AM","tz":"MDT","location":"East Boulder Community Center - East Turf","city":"Boulder, CO","outOfState":true,"address":"5660 Sioux Dr, Boulder, CO 80303","scoreFor":null,"scoreAgainst":null},{"id":28775,"opponent":"Tulsa Greenwood SC","homeAway":"away","date":"2026-10-24","time":"10:00 AM","tz":"CDT","location":"Ascension St. John Sportsplex - Field 9","city":"Tulsa, OK","outOfState":true,"address":"2925 S Elm Pl, Broken Arrow, OK 74012","scoreFor":null,"scoreAgainst":null},{"id":29203,"opponent":"Real Salt Lake","homeAway":"home","date":"2026-10-31","time":"12:00 PM","tz":"CDT","location":"Soccer Central - Field #2","city":"Home Field","outOfState":false,"address":"301 Soccer Way, Round Rock, TX 78664","scoreFor":null,"scoreAgainst":null},{"id":29616,"opponent":"Houston Rangers","homeAway":"away","date":"2026-11-07","time":"12:00 PM","tz":"CST","location":"Paul D Rushing Park - Field 3","city":"Houston, TX","outOfState":false,"address":"1717 Cullen Blvd, Pearland, TX 77581","scoreFor":null,"scoreAgainst":null},{"id":30502,"opponent":"SGA","homeAway":"home","date":"2026-11-21","time":"10:00 AM","tz":"CST","location":"Soccer Central - Field #2","city":"Home Field","outOfState":false,"address":"301 Soccer Way, Round Rock, TX 78664","scoreFor":null,"scoreAgainst":null},{"id":31259,"opponent":"Dallas Hornets","homeAway":"home","date":"2027-01-23","time":"12:00 PM","tz":"CST","location":"Soccer Central - Field #2","city":"Home Field","outOfState":false,"address":"301 Soccer Way, Round Rock, TX 78664","scoreFor":null,"scoreAgainst":null},{"id":31641,"opponent":"GFI Academy","homeAway":"away","date":"2027-02-06","time":"12:00 PM","tz":"CST","location":"Lenze Rd - Field 1","city":"Texas","outOfState":false,"address":"1500 Lenze Rd, Katy, TX 77493","scoreFor":null,"scoreAgainst":null},{"id":31808,"opponent":"ALBION SC Colorado","homeAway":"home","date":"2027-02-13","time":"10:00 AM","tz":"CST","location":"Soccer Central - Field #2","city":"Home Field","outOfState":false,"address":"301 Soccer Way, Round Rock, TX 78664","scoreFor":null,"scoreAgainst":null},{"id":32324,"opponent":"Real Salt Lake","homeAway":"away","date":"2027-02-21","time":"6:00 AM","tz":"MST","location":"TBD","city":"Utah","outOfState":true,"address":"","scoreFor":null,"scoreAgainst":null},{"id":32538,"opponent":"Austin FC","homeAway":"home","date":"2027-02-27","time":"10:00 AM","tz":"CST","location":"Soccer Central - Field #1","city":"Home Field","outOfState":false,"address":"301 Soccer Way, Round Rock, TX 78664","scoreFor":null,"scoreAgainst":null},{"id":33606,"opponent":"FC Dallas","homeAway":"home","date":"2027-03-14","time":"6:00 AM","tz":"CDT","location":"TBD","city":"Home Field","outOfState":false,"address":"","scoreFor":null,"scoreAgainst":null},{"id":34537,"opponent":"Capital City SC","homeAway":"home","date":"2027-04-03","time":"2:00 PM","tz":"CDT","location":"Soccer Central - Field #3","city":"Home Field","outOfState":false,"address":"301 Soccer Way, Round Rock, TX 78664","scoreFor":null,"scoreAgainst":null},{"id":34981,"opponent":"Dallas Hornets","homeAway":"away","date":"2027-04-10","time":"6:00 AM","tz":"CDT","location":"TBD","city":"Texas","outOfState":false,"address":"","scoreFor":null,"scoreAgainst":null},{"id":35845,"opponent":"SGA","homeAway":"away","date":"2027-04-24","time":"6:00 AM","tz":"CDT","location":"TBD","city":"Texas","outOfState":false,"address":"","scoreFor":null,"scoreAgainst":null},{"id":36302,"opponent":"Tulsa Greenwood SC","homeAway":"home","date":"2027-05-01","time":"10:00 AM","tz":"CDT","location":"Soccer Central - Field #2","city":"Home Field","outOfState":false,"address":"301 Soccer Way, Round Rock, TX 78664","scoreFor":null,"scoreAgainst":null}];
+var pageHTML = function pageHTML(matches) {
+  return `<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AC River U13 Schedule</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Libre+Franklin:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#f5f3ee; --surface:#ffffff; --surface-2:#eeece4;
+    --ink:#1a2133; --muted:#5b6274;
+    --navy:#182a4d; --navy-2:#24406f;
+    --red:#b93b34;
+    --gold:#a8701e; --gold-bg:#f7ecd8; --gold-line:#e3cd9c;
+    --line:#e2ded2;
+    --shadow: 0 1px 2px rgba(24,30,50,0.04), 0 8px 24px -12px rgba(24,30,50,0.12);
+    --home-bg:#eaf0f6; --home-line:#c9d9ea; --home-ink:#1c4a7a;
+    --ok-bg:#e9f4ea; --ok-line:#bfdec4; --ok-ink:#276437;
+    --err-bg:#fbeceb; --err-line:#f0c4c0; --err-ink:#9a3229;
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --bg:#11151f; --surface:#181d2b; --surface-2:#1f2536;
+      --ink:#e9ebf2; --muted:#9aa2b8;
+      --navy:#8fb0ea; --navy-2:#a9c4f4;
+      --red:#e2776e;
+      --gold:#e0ac5c; --gold-bg:#2c2517; --gold-line:#4a3c22;
+      --line:#2a3247;
+      --shadow: 0 1px 2px rgba(0,0,0,0.3), 0 8px 24px -12px rgba(0,0,0,0.5);
+      --home-bg:#182838; --home-line:#2b4966; --home-ink:#9cc4ee;
+      --ok-bg:#182a1e; --ok-line:#2e4c37; --ok-ink:#8fd39e;
+      --err-bg:#2c1a19; --err-line:#4c2b28; --err-ink:#e8a29b;
+    }
+  }
+  :root[data-theme="dark"]{
+    --bg:#11151f; --surface:#181d2b; --surface-2:#1f2536;
+    --ink:#e9ebf2; --muted:#9aa2b8;
+    --navy:#8fb0ea; --navy-2:#a9c4f4;
+    --red:#e2776e;
+    --gold:#e0ac5c; --gold-bg:#2c2517; --gold-line:#4a3c22;
+    --line:#2a3247;
+    --shadow: 0 1px 2px rgba(0,0,0,0.3), 0 8px 24px -12px rgba(0,0,0,0.5);
+    --home-bg:#182838; --home-line:#2b4966; --home-ink:#9cc4ee;
+    --ok-bg:#182a1e; --ok-line:#2e4c37; --ok-ink:#8fd39e;
+    --err-bg:#2c1a19; --err-line:#4c2b28; --err-ink:#e8a29b;
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    background:var(--bg); color:var(--ink);
+    font-family:"Libre Franklin", ui-sans-serif, system-ui, sans-serif;
+    font-variant-numeric: tabular-nums;
+    -webkit-font-smoothing:antialiased;
+    min-height:100vh;
+  }
+  .wrap{ max-width:760px; margin:0 auto; padding:28px 18px 96px; }
+  header.top{ display:flex; flex-direction:column; gap:6px; margin-bottom:22px; }
+  .crest-row{ display:flex; align-items:center; gap:12px; justify-content:space-between; }
+  .crest-id{ display:flex; align-items:center; gap:12px; }
+  .crest{
+    width:44px;height:44px;border-radius:10px;
+    background:linear-gradient(160deg, var(--navy), var(--navy-2));
+    display:flex;align-items:center;justify-content:center;
+    color:#fff;font-family:"Oswald",sans-serif;font-weight:600;font-size:15px;
+    flex:none; box-shadow:var(--shadow);
+  }
+  h1{
+    font-family:"Oswald", ui-sans-serif, sans-serif; font-weight:600;
+    font-size:clamp(24px,5vw,32px); margin:0; text-wrap:balance; color:var(--ink);
+  }
+  .subtitle{ color:var(--muted); font-size:14.5px; margin:0; }
+  .meta-line{ color:var(--muted); font-size:12.5px; margin-top:10px; line-height:1.5; }
+  .icon-btn{
+    appearance:none; border:1px solid var(--line); background:var(--surface);
+    color:var(--muted); width:38px; height:38px; border-radius:10px;
+    display:flex; align-items:center; justify-content:center; cursor:pointer;
+    flex:none; transition:all .15s ease;
+  }
+  .icon-btn:hover{ color:var(--ink); border-color:var(--navy-2); }
+  .icon-btn.active{ background:var(--navy); border-color:var(--navy); color:#fff; }
+  .next-card{
+    margin-top:18px; background:var(--surface); border:1px solid var(--line);
+    border-radius:16px; padding:16px 18px; box-shadow:var(--shadow); display:none;
+  }
+  .next-card.show{display:block;}
+  .next-label{
+    font-family:"Oswald",sans-serif; text-transform:uppercase; letter-spacing:0.12em;
+    font-size:11px; color:var(--red); font-weight:600; margin-bottom:6px;
+  }
+  .next-body{ display:flex; align-items:baseline; justify-content:space-between; gap:12px; flex-wrap:wrap; }
+  .next-teams{ font-family:"Oswald",sans-serif; font-size:19px; font-weight:500; color:var(--ink); }
+  .next-when{ color:var(--muted); font-size:13.5px; }
+  .toolbar{ display:flex; gap:8px; flex-wrap:wrap; margin:22px 0 8px; align-items:center; justify-content:space-between; }
+  .filters{ display:flex; gap:8px; flex-wrap:wrap; }
+  .chip{
+    appearance:none; border:1px solid var(--line); background:var(--surface); color:var(--muted);
+    padding:7px 14px; border-radius:999px; font-family:"Libre Franklin", sans-serif;
+    font-size:13px; font-weight:600; cursor:pointer; transition:all 0.15s ease;
+  }
+  .chip:hover{border-color:var(--navy-2);}
+  .chip.active{ background:var(--navy); border-color:var(--navy); color:#fff; }
+  .chip .count{ opacity:0.7; font-weight:500; margin-left:3px; }
+  .ghost-btn{
+    appearance:none; border:1px dashed var(--line); background:transparent; color:var(--muted);
+    padding:7px 12px; border-radius:10px; font-family:"Libre Franklin", sans-serif;
+    font-size:12.5px; font-weight:600; cursor:pointer;
+  }
+  .ghost-btn:hover{ color:var(--ink); border-color:var(--navy-2); }
+  .month-heading{
+    font-family:"Oswald",sans-serif; font-size:13px; text-transform:uppercase; letter-spacing:0.14em;
+    color:var(--muted); margin:28px 2px 10px; padding-bottom:8px; border-bottom:1px solid var(--line);
+  }
+  .month-heading:first-of-type{margin-top:20px;}
+  .match{
+    display:grid; grid-template-columns:56px 1fr auto; gap:14px; align-items:center;
+    background:var(--surface); border:1px solid var(--line); border-radius:14px;
+    padding:13px 14px; margin-bottom:10px; box-shadow:var(--shadow);
+  }
+  .datebox{ text-align:center; line-height:1.05; }
+  .datebox .dow{ font-size:10.5px; text-transform:uppercase; letter-spacing:0.06em; color:var(--muted); font-weight:600; }
+  .datebox .day{ font-family:"Oswald",sans-serif; font-size:24px; font-weight:600; color:var(--ink); }
+  .datebox .mon{ font-size:10.5px; text-transform:uppercase; letter-spacing:0.06em; color:var(--muted); }
+  .info .teams{ font-size:15.5px; font-weight:600; color:var(--ink); display:flex; align-items:center; gap:8px; flex-wrap:wrap; }
+  .tag{
+    font-family:"Oswald",sans-serif; font-size:10.5px; font-weight:600; letter-spacing:0.06em;
+    padding:2px 7px; border-radius:5px; text-transform:uppercase;
+  }
+  .tag.home{background:var(--home-bg);color:var(--home-ink);border:1px solid var(--home-line);}
+  .tag.away{background:var(--surface-2);color:var(--muted);border:1px solid var(--line);}
+  .tag.travel{background:var(--gold-bg);color:var(--gold);border:1px solid var(--gold-line);}
+  .info .sub{ margin-top:5px; font-size:13px; color:var(--muted); display:flex; flex-wrap:wrap; gap:2px 8px; }
+  .info .sub .dot{opacity:0.5;}
+  .info .addr{ margin-top:3px; font-size:12px; }
+  .info .addr a{ color:var(--muted); text-decoration:underline; text-decoration-color:var(--line); text-underline-offset:2px; }
+  .info .addr a:hover{ color:var(--navy-2); text-decoration-color:var(--navy-2); }
+  .side{ text-align:right; display:flex; flex-direction:column; align-items:flex-end; gap:4px; }
+  .time{ font-weight:700; font-size:14px; color:var(--ink); white-space:nowrap; }
+  .mid{ font-size:11px; color:var(--muted); white-space:nowrap; }
+  .score-badge{
+    font-family:"Oswald",sans-serif; font-size:13px; font-weight:600; letter-spacing:0.02em;
+    padding:2px 9px; border-radius:6px; white-space:nowrap;
+  }
+  .score-badge.win{ background:var(--ok-bg); color:var(--ok-ink); border:1px solid var(--ok-line); }
+  .score-badge.loss{ background:var(--err-bg); color:var(--err-ink); border:1px solid var(--err-line); }
+  .score-badge.draw{ background:var(--surface-2); color:var(--muted); border:1px solid var(--line); }
+  .empty{ text-align:center; color:var(--muted); padding:40px 0; font-size:14px; display:none; }
+  .empty.show{display:block;}
+  footer{
+    margin-top:36px; padding-top:16px; border-top:1px solid var(--line);
+    color:var(--muted); font-size:12.5px; line-height:1.6;
+  }
+  .edit-card{
+    background:var(--surface); border:1px solid var(--line); border-radius:14px;
+    padding:14px; margin-bottom:10px; box-shadow:var(--shadow);
+  }
+  .edit-grid{ display:grid; grid-template-columns:1fr 1fr; gap:10px 12px; }
+  .edit-grid .full{ grid-column:1 / -1; }
+  .field{ display:flex; flex-direction:column; gap:4px; }
+  .field label{ font-size:11px; font-weight:600; text-transform:uppercase; letter-spacing:0.05em; color:var(--muted); }
+  .field input, .field select{
+    font:inherit; font-size:14px; padding:8px 10px; border-radius:8px;
+    border:1px solid var(--line); background:var(--bg); color:var(--ink);
+  }
+  .field input:focus, .field select:focus{ outline:2px solid var(--navy-2); outline-offset:1px; }
+  .edit-row-actions{ display:flex; justify-content:space-between; align-items:center; margin-top:10px; }
+  .id-badge{ font-size:11px; color:var(--muted); }
+  .remove-btn{
+    appearance:none; border:1px solid var(--err-line); background:var(--err-bg); color:var(--err-ink);
+    padding:6px 11px; border-radius:8px; font-size:12.5px; font-weight:600; cursor:pointer;
+  }
+  .remove-btn:hover{ filter:brightness(0.96); }
+  .add-card{
+    border:1px dashed var(--line); border-radius:14px; padding:14px;
+    display:flex; align-items:center; justify-content:center; margin-bottom:14px;
+    color:var(--muted); font-size:13.5px; font-weight:600; cursor:pointer; background:transparent;
+    width:100%; font-family:inherit;
+  }
+  .add-card:hover{ border-color:var(--navy-2); color:var(--ink); }
+  .save-bar{
+    position:fixed; left:0; right:0; bottom:0; z-index:20;
+    background:var(--surface); border-top:1px solid var(--line);
+    box-shadow:0 -8px 24px -12px rgba(24,30,50,0.18);
+    padding:12px 18px; display:none; align-items:center; justify-content:center;
+  }
+  .save-bar.show{ display:flex; }
+  .save-bar-inner{
+    max-width:760px; width:100%; display:flex; align-items:center; justify-content:space-between; gap:12px; flex-wrap:wrap;
+  }
+  .save-status{ font-size:12.5px; color:var(--muted); }
+  .save-status.err{ color:var(--err-ink); }
+  .save-status.ok{ color:var(--ok-ink); }
+  .btn-row{ display:flex; gap:8px; }
+  .btn{
+    appearance:none; border-radius:10px; padding:9px 16px; font-size:13.5px; font-weight:700;
+    cursor:pointer; font-family:"Libre Franklin",sans-serif;
+  }
+  .btn.primary{ background:var(--navy); border:1px solid var(--navy); color:#fff; }
+  .btn.primary:disabled{ opacity:0.5; cursor:default; }
+  .btn.secondary{ background:transparent; border:1px solid var(--line); color:var(--muted); }
+  .notice{
+    border-radius:12px; padding:10px 14px; font-size:13px; margin-bottom:14px;
+    border:1px solid var(--line); background:var(--surface-2); color:var(--muted);
+  }
+  @media (max-width:420px){
+    .match{grid-template-columns:48px 1fr auto; padding:12px 10px; gap:10px;}
+    .datebox .day{font-size:21px;}
+    .next-body{flex-direction:column; align-items:flex-start;}
+    .edit-grid{ grid-template-columns:1fr; }
+  }
+</style>
+<body>
+<div id="app"></div>
+<script>
+var MATCHES_DATA = ${JSON.stringify(matches)};
+var pageHTML = ${pageHTML.toString()};
+var appMain = ${appMain.toString()};
+appMain(MATCHES_DATA);
+</` + `script>
+</body>
+</html>`;
+};
+var appMain = function appMain(MATCHES_DATA) {
+
+  var TZ_OFFSET = {CDT:-5, CST:-6, MDT:-6, MST:-7};
+  var DOW = ["SUN","MON","TUE","WED","THU","FRI","SAT"];
+  var MON = ["JAN","FEB","MAR","APR","MAY","JUN","JUL","AUG","SEP","OCT","NOV","DEC"];
+  var MONTH_FULL = ["January","February","March","April","May","June","July","August","September","October","November","December"];
+
+  var state = {
+    matches: MATCHES_DATA.slice(),
+    filter: "all",
+    editMode: false,
+    draft: null,
+    canWrite: null,      // null = unknown, true/false once known
+    saving: false,
+    saveMsg: "",
+    saveMsgKind: ""
+  };
+
+  var artifactCap = null;
+  var downloadsCap = null;
+
+  function toUTC(m){
+    var parts = m.date.split("-").map(Number);
+    var y = parts[0], mo = parts[1], d = parts[2];
+    var t = /(\d+):(\d+)\s*(AM|PM)/i.exec(m.time);
+    var h = t ? parseInt(t[1],10) : 12;
+    var min = t ? parseInt(t[2],10) : 0;
+    var ap = t ? t[3].toUpperCase() : "AM";
+    if(ap === "PM" && h !== 12) h += 12;
+    if(ap === "AM" && h === 12) h = 0;
+    var offset = TZ_OFFSET[m.tz] != null ? TZ_OFFSET[m.tz] : -6;
+    return new Date(Date.UTC(y, mo-1, d, h - offset, min, 0));
+  }
+
+  function decorate(list){
+    return list.map(function(m){
+      var c = Object.assign({}, m);
+      c._utc = toUTC(m);
+      c._isHome = m.homeAway === "home";
+      c.home = c._isHome ? "AC River" : m.opponent;
+      c.away = c._isHome ? m.opponent : "AC River";
+      var fs = m.scoreFor, as = m.scoreAgainst;
+      c._hasScore = (fs !== null && fs !== undefined && fs !== "") && (as !== null && as !== undefined && as !== "");
+      if(c._hasScore){
+        var usScore = Number(fs), themScore = Number(as);
+        c._result = usScore > themScore ? "win" : (usScore < themScore ? "loss" : "draw");
+        c._resultLabel = usScore > themScore ? "W" : (usScore < themScore ? "L" : "T");
+        c._scoreLine = usScore + "–" + themScore;
+      }
+      return c;
+    });
+  }
+
+  function fmtWhen(m){
+    var d = m._utc;
+    return DOW[d.getUTCDay()] + " " + MON[d.getUTCMonth()] + " " + d.getUTCDate() + " \u00b7 " + m.time + " " + m.tz;
+  }
+
+  function esc(s){
+    return String(s == null ? "" : s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");
+  }
+
+  var app = document.getElementById("app");
+
+  function counts(list){
+    return {
+      all: list.length,
+      home: list.filter(function(m){return m._isHome;}).length,
+      away: list.filter(function(m){return !m._isHome;}).length,
+      travel: list.filter(function(m){return m.outOfState;}).length
+    };
+  }
+
+  var FILTERS = [
+    {key:"all", label:"All Matches"},
+    {key:"home", label:"Home"},
+    {key:"away", label:"Away"},
+    {key:"travel", label:"Out-of-State"}
+  ];
+
+  function render(){
+    var decorated = decorate(state.matches);
+    var html = "";
+
+    html += '<div class="wrap">';
+
+    html += '<header class="top">';
+    html += '<div class="crest-row"><div class="crest-id"><div class="crest">AC</div><div><h1>AC River U13</h1><p class="subtitle">2026\u2013127 League Schedule</p></div></div>';
+    if(artifactCap && state.canWrite !== false){
+      html += '<button class="icon-btn' + (state.editMode ? ' active' : '') + '" id="editToggle" title="Edit schedule" aria-label="Edit schedule">\u270E</button>';
+    }
+    html += '</div>';
+    var c = counts(decorated);
+    html += '<p class="meta-line">' + decorated.length + ' matches \u00b7 ' + c.travel + ' out-of-state \u00b7 updated live from this page</p>';
+    html += '</header>';
+
+    if(state.canWrite === false){
+      html += '<div class="notice">You\u2019re viewing a read-only copy of this schedule \u2014 edits here won\u2019t be saved. Ask the page owner to share edit access if you need to make changes.</div>';
+    }
+
+    if(!state.editMode){
+      var now = new Date();
+      var upcoming = decorated.filter(function(m){return m._utc > now;}).sort(function(a,b){return a._utc-b._utc;})[0];
+      if(upcoming){
+        var haWord = upcoming._isHome ? "vs" : "at";
+        html += '<div class="next-card show"><div class="next-label">Next Match</div><div class="next-body">';
+        html += '<div class="next-teams">AC River ' + haWord + ' ' + esc(upcoming.opponent) + '</div>';
+        html += '<div class="next-when">' + fmtWhen(upcoming) + '</div></div></div>';
+      }
+    }
+
+    html += '<div class="toolbar">';
+    html += '<div class="filters" id="filters">';
+    FILTERS.forEach(function(f){
+      html += '<button class="chip' + (state.filter===f.key?' active':'') + '" data-filter="' + f.key + '">' + f.label + ' <span class="count">' + c[f.key] + '</span></button>';
+    });
+    html += '</div>';
+    if(downloadsCap){
+      html += '<button class="ghost-btn" id="downloadCsv">Download CSV</button>';
+    }
+    html += '</div>';
+
+    if(state.editMode){
+      html += renderEditList();
+    } else {
+      html += renderViewList(decorated);
+    }
+
+    html += '<footer>Times shown in each match\u2019s local timezone (as listed). Away games marked <strong>Travel</strong> are outside Texas. Locations marked TBD will be updated by the league closer to the date.';
+    if(artifactCap && state.canWrite !== false){
+      html += ' Tap the pencil above to add, edit, or remove matches \u2014 changes publish instantly for everyone viewing this page.';
+    }
+    html += '</footer>';
+
+    html += '</div>'; // wrap
+
+    if(state.editMode){
+      html += '<div class="save-bar' + (state.editMode ? ' show' : '') + '"><div class="save-bar-inner">';
+      html += '<div class="save-status' + (state.saveMsgKind ? ' ' + state.saveMsgKind : '') + '">' + esc(state.saveMsg || (decorated.length + ' matches')) + '</div>';
+      html += '<div class="btn-row"><button class="btn secondary" id="cancelEdit">Cancel</button><button class="btn primary" id="saveEdit"' + (state.saving?' disabled':'') + '>' + (state.saving ? 'Saving\u2026' : 'Save Changes') + '</button></div>';
+      html += '</div></div>';
+    }
+
+    app.innerHTML = html;
+    wire(decorated);
+  }
+
+  function renderViewList(decorated){
+    var sorted = decorated.slice().sort(function(a,b){return a._utc-b._utc;});
+    var filtered = sorted.filter(function(m){
+      if(state.filter==="all") return true;
+      if(state.filter==="home") return m._isHome;
+      if(state.filter==="away") return !m._isHome;
+      if(state.filter==="travel") return m.outOfState;
+      return true;
+    });
+    var out = "";
+    var lastMonth = null;
+    if(filtered.length === 0){
+      out += '<p class="empty show">No matches in this view.</p>';
+      return out;
+    }
+    filtered.forEach(function(m){
+      var d = m._utc;
+      var key = d.getUTCFullYear() + "-" + d.getUTCMonth();
+      if(key !== lastMonth){
+        lastMonth = key;
+        out += '<div class="month-heading">' + MONTH_FULL[d.getUTCMonth()] + ' ' + d.getUTCFullYear() + '</div>';
+      }
+      var travelTag = m.outOfState ? '<span class="tag travel">Travel</span>' : '';
+      var haTag = m._isHome ? '<span class="tag home">Home</span>' : '<span class="tag away">Away</span>';
+      out += '<div class="match">';
+      out += '<div class="datebox"><div class="dow">' + DOW[d.getUTCDay()] + '</div><div class="day">' + d.getUTCDate() + '</div><div class="mon">' + MON[d.getUTCMonth()] + '</div></div>';
+      out += '<div class="info"><div class="teams">vs ' + esc(m.opponent) + ' ' + haTag + ' ' + travelTag + '</div>';
+      out += '<div class="sub"><span>' + esc(m.location) + '</span><span class="dot">\u00b7</span><span>' + esc(m.city) + '</span></div>';
+      if(m.address && m.address.trim()){
+        out += '<div class="addr"><a href="https://maps.google.com/?q=' + encodeURIComponent(m.address) + '" target="_blank" rel="noopener">' + esc(m.address) + '</a></div>';
+      }
+      out += '</div>';
+      out += '<div class="side">';
+      if(m._hasScore){
+        out += '<span class="score-badge ' + m._result + '">' + m._resultLabel + ' ' + m._scoreLine + '</span>';
+      }
+      out += '<div class="time">' + esc(m.time) + ' ' + esc(m.tz) + '</div><div class="mid">ID ' + m.id + '</div></div>';
+      out += '</div>';
+    });
+    return out;
+  }
+
+  function renderEditList(){
+    var draft = state.draft;
+    var out = "";
+    draft.forEach(function(m, i){
+      out += '<div class="edit-card" data-idx="' + i + '">';
+      out += '<div class="edit-grid">';
+      out += field("Opponent", "text", "opponent", m.opponent, i);
+      out += selectField("Home / Away", "homeAway", m.homeAway, i, [["home","Home"],["away","Away"]]);
+      out += field("Date", "date", "date", m.date, i);
+      out += field("Time", "text", "time", m.time, i, "e.g. 10:00 AM");
+      out += selectField("Timezone", "tz", m.tz, i, [["CDT","CDT \u2013 Central (summer)"],["CST","CST \u2013 Central (winter)"],["MDT","MDT \u2013 Mountain (summer)"],["MST","MST \u2013 Mountain (winter)"]]);
+      out += field("Match ID", "text", "id", m.id, i);
+      out += field("Location / Field", "text", "location", m.location, i, "", "full");
+      out += field("Street address", "text", "address", m.address, i, "e.g. 301 Soccer Way, Round Rock, TX", "full");
+      out += field("City, State", "text", "city", m.city, i);
+      out += selectField("Out of state?", "outOfState", m.outOfState ? "yes" : "no", i, [["no","No \u2014 in Texas"],["yes","Yes \u2014 travel required"]]);
+      out += field("AC River score", "number", "scoreFor", m.scoreFor, i, "e.g. 3");
+      out += field("Opponent score", "number", "scoreAgainst", m.scoreAgainst, i, "e.g. 1");
+      out += '</div>';
+      out += '<div class="edit-row-actions"><span class="id-badge">Row ' + (i+1) + '</span><button class="remove-btn" data-remove="' + i + '">Remove match</button></div>';
+      out += '</div>';
+    });
+    out += '<button class="add-card" id="addMatch">+ Add a match</button>';
+    return out;
+  }
+
+  function field(label, type, key, val, i, placeholder, cls){
+    return '<div class="field' + (cls?' '+cls:'') + '"><label>' + label + '</label><input type="' + type + '" data-key="' + key + '" data-idx="' + i + '" value="' + esc(val) + '"' + (placeholder ? ' placeholder="' + esc(placeholder) + '"' : '') + '></div>';
+  }
+
+  function selectField(label, key, val, i, options){
+    var out = '<div class="field"><label>' + label + '</label><select data-key="' + key + '" data-idx="' + i + '">';
+    options.forEach(function(opt){
+      out += '<option value="' + opt[0] + '"' + (opt[0]===String(val) || opt[0]===val ? ' selected' : '') + '>' + opt[1] + '</option>';
+    });
+    out += '</select></div>';
+    return out;
+  }
+
+  function wire(decorated){
+    var filtersEl = document.getElementById("filters");
+    if(filtersEl){
+      filtersEl.querySelectorAll(".chip").forEach(function(btn){
+        btn.addEventListener("click", function(){
+          state.filter = btn.getAttribute("data-filter");
+          render();
+        });
+      });
+    }
+
+    var editToggle = document.getElementById("editToggle");
+    if(editToggle){
+      editToggle.addEventListener("click", function(){
+        state.editMode = true;
+        state.draft = state.matches.map(function(m){ return Object.assign({}, m); });
+        state.saveMsg = "";
+        state.saveMsgKind = "";
+        render();
+      });
+    }
+
+    var downloadBtn = document.getElementById("downloadCsv");
+    if(downloadBtn){
+      downloadBtn.addEventListener("click", function(){ downloadCsv(); });
+    }
+
+    var cancelBtn = document.getElementById("cancelEdit");
+    if(cancelBtn){
+      cancelBtn.addEventListener("click", function(){
+        state.editMode = false;
+        state.draft = null;
+        render();
+      });
+    }
+
+    var addBtn = document.getElementById("addMatch");
+    if(addBtn){
+      addBtn.addEventListener("click", function(){
+        state.draft.push({
+          id: "", opponent: "", homeAway: "home", date: "", time: "", tz: "CDT",
+          location: "", address: "", city: "", outOfState: false,
+          scoreFor: null, scoreAgainst: null
+        });
+        render();
+      });
+    }
+
+    document.querySelectorAll(".remove-btn").forEach(function(btn){
+      btn.addEventListener("click", function(){
+        var idx = parseInt(btn.getAttribute("data-remove"),10);
+        state.draft.splice(idx,1);
+        render();
+      });
+    });
+
+    document.querySelectorAll(".edit-grid input, .edit-grid select").forEach(function(el){
+      el.addEventListener("change", function(){
+        var idx = parseInt(el.getAttribute("data-idx"),10);
+        var key = el.getAttribute("data-key");
+        var val = el.value;
+        if(key === "outOfState") val = (val === "yes");
+        if(key === "id") val = val.trim() === "" ? "" : (isNaN(Number(val)) ? val : Number(val));
+        if(key === "scoreFor" || key === "scoreAgainst") val = val.trim() === "" ? null : Number(val);
+        state.draft[idx][key] = val;
+      });
+    });
+
+    var saveBtn = document.getElementById("saveEdit");
+    if(saveBtn){
+      saveBtn.addEventListener("click", function(){ doSave(); });
+    }
+  }
+
+  function downloadCsv(){
+    if(!downloadsCap) return;
+    var rows = [["Match ID","Home","Away","Date","Time","Timezone","Location","Address","City/State","Out of State","AC River Score","Opponent Score","Result"]];
+    decorate(state.matches).sort(function(a,b){return a._utc-b._utc;}).forEach(function(m){
+      rows.push([m.id, m.home, m.away, m.date, m.time, m.tz, m.location, m.address || "", m.city, m.outOfState ? "Yes" : "No", m.scoreFor==null?"":m.scoreFor, m.scoreAgainst==null?"":m.scoreAgainst, m._hasScore ? m._resultLabel : ""]);
+    });
+    var csv = rows.map(function(r){
+      return r.map(function(v){
+        var s = String(v == null ? "" : v);
+        if(/[",\n]/.test(s)) s = '"' + s.replace(/"/g,'""') + '"';
+        return s;
+      }).join(",");
+    }).join("\r\n");
+    downloadsCap.save({filename:"ac-river-u13-schedule.csv", data: csv}).catch(function(){ /* declined or unavailable */ });
+  }
+
+  function validate(draft){
+    for(var i=0;i<draft.length;i++){
+      var m = draft[i];
+      if(!m.opponent || !m.opponent.trim()) return "Row " + (i+1) + ": opponent is required.";
+      if(!m.date || !/^\d{4}-\d{2}-\d{2}$/.test(m.date)) return "Row " + (i+1) + ": date must be set (YYYY-MM-DD).";
+      if(!m.time || !/\d{1,2}:\d{2}\s*(AM|PM)/i.test(m.time)) return "Row " + (i+1) + ": time must look like \"10:00 AM\".";
+      if(!m.location || !m.location.trim()) return "Row " + (i+1) + ": location is required (use TBD if unknown).";
+    }
+    return null;
+  }
+
+  function doSave(){
+    var err = validate(state.draft);
+    if(err){
+      state.saveMsg = err;
+      state.saveMsgKind = "err";
+      render();
+      return;
+    }
+    if(!artifactCap){
+      state.saveMsg = "Saving isn\u2019t available in this view.";
+      state.saveMsgKind = "err";
+      render();
+      return;
+    }
+    state.saving = true;
+    state.saveMsg = "Saving\u2026";
+    state.saveMsgKind = "";
+    render();
+
+    var cleaned = state.draft.map(function(m){
+      return {
+        id: m.id === "" ? "" : m.id,
+        opponent: m.opponent.trim(),
+        homeAway: m.homeAway,
+        date: m.date,
+        time: m.time.trim(),
+        tz: m.tz,
+        location: m.location.trim(),
+        address: (m.address || "").trim(),
+        city: (m.city || "").trim(),
+        outOfState: !!m.outOfState,
+        scoreFor: (m.scoreFor === "" || m.scoreFor === undefined) ? null : m.scoreFor,
+        scoreAgainst: (m.scoreAgainst === "" || m.scoreAgainst === undefined) ? null : m.scoreAgainst
+      };
+    });
+
+    var html = pageHTML(cleaned);
+    artifactCap.publish(html).then(function(){
+      // view reloads automatically on success
+    }).catch(function(e){
+      state.saving = false;
+      if(e && (e.code === "not_writer" || e.code === "not_granted")){
+        state.canWrite = false;
+        state.editMode = false;
+        state.draft = null;
+        state.saveMsg = "";
+      } else if(e && e.code === "conflict"){
+        state.saveMsg = "Someone else just saved a change \u2014 reloading with the latest version.";
+        state.saveMsgKind = "err";
+      } else {
+        state.saveMsg = (e && e.message) ? e.message : "Couldn\u2019t save \u2014 please try again.";
+        state.saveMsgKind = "err";
+      }
+      render();
+    });
+  }
+
+  function init(){
+    render();
+    if(window.claude && typeof window.claude.use === "function"){
+      window.claude.use("artifact").then(function(cap){
+        artifactCap = cap;
+        if(cap) render();
+      });
+      window.claude.use("downloads").then(function(cap){
+        downloadsCap = cap;
+        if(cap) render();
+      });
+    }
+  }
+
+  init();
+};
+appMain(MATCHES_DATA);
+</script>
+</body>
+</html>
