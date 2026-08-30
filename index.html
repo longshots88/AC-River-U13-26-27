@@ -716,7 +716,7 @@ var appMain = function appMain(MATCHES_DATA) {
   function renderGithubPanel(){
     var g = state.ghDraft || state.github || {owner:"", repo:"", branch:"main", path:"index.html", token:""};
     var out = '<div class="edit-card">';
-    out += '<p style="margin:0 0 12px;font-size:13px;color:var(--muted);line-height:1.5;">Connect this page to a GitHub repo so the pencil above can save changes as commits — handy when this page is hosted on GitHub Pages instead of inside Claude. Create a <strong>fine-grained personal access token</strong> scoped to just this one repo with <strong>Contents: Read and write</strong> permission (in GitHub → Settings → Developer settings → Personal access tokens). The token is stored only in this browser’s local storage — it is never sent anywhere except directly to GitHub’s API.</p>';
+    out += '<p style="margin:0 0 12px;font-size:13px;color:var(--muted);line-height:1.5;">Connect this page to a GitHub repo so the pencil above can save changes as commits. Create a <strong>fine-grained personal access token</strong> scoped to just this one repo with <strong>Contents: Read and write</strong> permission (in GitHub → Settings → Developer settings → Personal access tokens). The token is stored only in this browser’s local storage — it is never sent anywhere except directly to GitHub’s API.</p>';
     out += '<div class="gh-grid">';
     out += '<div class="field"><label>Repo owner (username or org)</label><input type="text" id="ghOwner" value="' + esc(g.owner) + '" placeholder="e.g. albertsmith"></div>';
     out += '<div class="field"><label>Repository name</label><input type="text" id="ghRepo" value="' + esc(g.repo) + '" placeholder="e.g. ac-river-schedule"></div>';
