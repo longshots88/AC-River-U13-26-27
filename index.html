@@ -59,6 +59,7 @@
   header.top{ display:flex; flex-direction:column; gap:6px; margin-bottom:22px; }
   .crest-row{ display:flex; align-items:center; gap:12px; justify-content:space-between; }
   .crest-id{ display:flex; align-items:center; gap:12px; }
+  .header-actions{ display:flex; align-items:center; gap:8px; }
   .crest{
     width:44px;height:44px;border-radius:10px;
     background:linear-gradient(160deg, var(--navy), var(--navy-2));
@@ -157,6 +158,8 @@
   }
   .edit-grid{ display:grid; grid-template-columns:1fr 1fr; gap:10px 12px; }
   .edit-grid .full{ grid-column:1 / -1; }
+  .gh-grid{ display:grid; grid-template-columns:1fr 1fr; gap:10px 12px; }
+  .gh-grid .full{ grid-column:1 / -1; }
   .field{ display:flex; flex-direction:column; gap:4px; }
   .field label{ font-size:11px; font-weight:600; text-transform:uppercase; letter-spacing:0.05em; color:var(--muted); }
   .field input, .field select{
@@ -208,12 +211,13 @@
     .datebox .day{font-size:21px;}
     .next-body{flex-direction:column; align-items:flex-start;}
     .edit-grid{ grid-template-columns:1fr; }
+    .gh-grid{ grid-template-columns:1fr; }
   }
 </style>
 <body>
 <div id="app"></div>
 <script>
-var MATCHES_DATA = [{"id":26430,"opponent":"Austin FC","homeAway":"away","date":"2026-09-12","time":"10:00 AM","tz":"CDT","location":"St. David's Performance Center – Field 4","city":"Austin, TX","outOfState":false,"address":"5300 Hudson Bend Rd, Austin, TX 78734","scoreFor":null,"scoreAgainst":null},{"id":26862,"opponent":"GFI Academy","homeAway":"home","date":"2026-09-19","time":"2:00 PM","tz":"CDT","location":"Soccer Central - Field #2","city":"Home Field","outOfState":false,"address":"301 Soccer Way, Round Rock, TX 78664","scoreFor":null,"scoreAgainst":null},{"id":27300,"opponent":"Houston Rangers","homeAway":"home","date":"2026-09-26","time":"12:00 PM","tz":"CDT","location":"Soccer Central - Field #2","city":"Home Field","outOfState":false,"address":"301 Soccer Way, Round Rock, TX 78664","scoreFor":null,"scoreAgainst":null},{"id":33814,"opponent":"Capital City SC","homeAway":"away","date":"2026-09-27","time":"3:00 PM","tz":"CDT","location":"1849 Park - Field #2","city":"Texas","outOfState":false,"address":"1849 Ranch Rd 620 S, Austin, TX 78734","scoreFor":null,"scoreAgainst":null},{"id":28279,"opponent":"FC Dallas","homeAway":"away","date":"2026-10-03","time":"3:00 PM","tz":"CDT","location":"Toyota Soccer Center - Field 7","city":"Frisco, TX","outOfState":false,"address":"8207 Kaci Ln, Frisco, TX 75034","scoreFor":null,"scoreAgainst":null},{"id":33180,"opponent":"ALBION SC Colorado","homeAway":"away","date":"2026-10-18","time":"10:00 AM","tz":"MDT","location":"East Boulder Community Center - East Turf","city":"Boulder, CO","outOfState":true,"address":"5660 Sioux Dr, Boulder, CO 80303","scoreFor":null,"scoreAgainst":null},{"id":28775,"opponent":"Tulsa Greenwood SC","homeAway":"away","date":"2026-10-24","time":"10:00 AM","tz":"CDT","location":"Ascension St. John Sportsplex - Field 9","city":"Tulsa, OK","outOfState":true,"address":"2925 S Elm Pl, Broken Arrow, OK 74012","scoreFor":null,"scoreAgainst":null},{"id":29203,"opponent":"Real Salt Lake","homeAway":"home","date":"2026-10-31","time":"12:00 PM","tz":"CDT","location":"Soccer Central - Field #2","city":"Home Field","outOfState":false,"address":"301 Soccer Way, Round Rock, TX 78664","scoreFor":null,"scoreAgainst":null},{"id":29616,"opponent":"Houston Rangers","homeAway":"away","date":"2026-11-07","time":"12:00 PM","tz":"CST","location":"Paul D Rushing Park - Field 3","city":"Houston, TX","outOfState":false,"address":"1717 Cullen Blvd, Pearland, TX 77581","scoreFor":null,"scoreAgainst":null},{"id":30502,"opponent":"SGA","homeAway":"home","date":"2026-11-21","time":"10:00 AM","tz":"CST","location":"Soccer Central - Field #2","city":"Home Field","outOfState":false,"address":"301 Soccer Way, Round Rock, TX 78664","scoreFor":null,"scoreAgainst":null},{"id":31259,"opponent":"Dallas Hornets","homeAway":"home","date":"2027-01-23","time":"12:00 PM","tz":"CST","location":"Soccer Central - Field #2","city":"Home Field","outOfState":false,"address":"301 Soccer Way, Round Rock, TX 78664","scoreFor":null,"scoreAgainst":null},{"id":31641,"opponent":"GFI Academy","homeAway":"away","date":"2027-02-06","time":"12:00 PM","tz":"CST","location":"Lenze Rd - Field 1","city":"Texas","outOfState":false,"address":"1500 Lenze Rd, Katy, TX 77493","scoreFor":null,"scoreAgainst":null},{"id":31808,"opponent":"ALBION SC Colorado","homeAway":"home","date":"2027-02-13","time":"10:00 AM","tz":"CST","location":"Soccer Central - Field #2","city":"Home Field","outOfState":false,"address":"301 Soccer Way, Round Rock, TX 78664","scoreFor":null,"scoreAgainst":null},{"id":32324,"opponent":"Real Salt Lake","homeAway":"away","date":"2027-02-21","time":"6:00 AM","tz":"MST","location":"TBD","city":"Utah","outOfState":true,"address":"","scoreFor":null,"scoreAgainst":null},{"id":32538,"opponent":"Austin FC","homeAway":"home","date":"2027-02-27","time":"10:00 AM","tz":"CST","location":"Soccer Central - Field #1","city":"Home Field","outOfState":false,"address":"301 Soccer Way, Round Rock, TX 78664","scoreFor":null,"scoreAgainst":null},{"id":33606,"opponent":"FC Dallas","homeAway":"home","date":"2027-03-14","time":"6:00 AM","tz":"CDT","location":"TBD","city":"Home Field","outOfState":false,"address":"","scoreFor":null,"scoreAgainst":null},{"id":34537,"opponent":"Capital City SC","homeAway":"home","date":"2027-04-03","time":"2:00 PM","tz":"CDT","location":"Soccer Central - Field #3","city":"Home Field","outOfState":false,"address":"301 Soccer Way, Round Rock, TX 78664","scoreFor":null,"scoreAgainst":null},{"id":34981,"opponent":"Dallas Hornets","homeAway":"away","date":"2027-04-10","time":"6:00 AM","tz":"CDT","location":"TBD","city":"Texas","outOfState":false,"address":"","scoreFor":null,"scoreAgainst":null},{"id":35845,"opponent":"SGA","homeAway":"away","date":"2027-04-24","time":"6:00 AM","tz":"CDT","location":"TBD","city":"Texas","outOfState":false,"address":"","scoreFor":null,"scoreAgainst":null},{"id":36302,"opponent":"Tulsa Greenwood SC","homeAway":"home","date":"2027-05-01","time":"10:00 AM","tz":"CDT","location":"Soccer Central - Field #2","city":"Home Field","outOfState":false,"address":"301 Soccer Way, Round Rock, TX 78664","scoreFor":null,"scoreAgainst":null}];
+var MATCHES_DATA = [{"id":"","opponent":"GFI Academy","homeAway":"away","date":"2026-08-30","time":"2:00 PM","tz":"CDT","location":"Hohlt Park","address":"2425 N Park Street, Brenham, TX 77833","city":"Brenham, TX","outOfState":false,"scoreFor":null,"scoreAgainst":null},{"id":26430,"opponent":"Austin FC","homeAway":"away","date":"2026-09-12","time":"10:00 AM","tz":"CDT","location":"St. David's Performance Center – Field 4","city":"Austin, TX","outOfState":false,"address":"5300 Hudson Bend Rd, Austin, TX 78734","scoreFor":null,"scoreAgainst":null},{"id":26862,"opponent":"GFI Academy","homeAway":"home","date":"2026-09-19","time":"2:00 PM","tz":"CDT","location":"Soccer Central - Field #2","city":"Home Field","outOfState":false,"address":"6610 Low Bid Lane, San Antonio, TX 78250","scoreFor":null,"scoreAgainst":null},{"id":27300,"opponent":"Houston Rangers","homeAway":"home","date":"2026-09-26","time":"12:00 PM","tz":"CDT","location":"Soccer Central - Field #2","city":"Home Field","outOfState":false,"address":"6610 Low Bid Lane, San Antonio, TX 78250","scoreFor":null,"scoreAgainst":null},{"id":33814,"opponent":"Capital City SC","homeAway":"away","date":"2026-09-27","time":"3:00 PM","tz":"CDT","location":"1849 Park - Field #2","city":"Texas","outOfState":false,"address":"1849 Ranch Rd 620 S, Austin, TX 78734","scoreFor":null,"scoreAgainst":null},{"id":28279,"opponent":"FC Dallas","homeAway":"away","date":"2026-10-03","time":"3:00 PM","tz":"CDT","location":"Toyota Soccer Center - Field 7","city":"Frisco, TX","outOfState":false,"address":"8207 Kaci Ln, Frisco, TX 75034","scoreFor":null,"scoreAgainst":null},{"id":33180,"opponent":"ALBION SC Colorado","homeAway":"away","date":"2026-10-18","time":"10:00 AM","tz":"MDT","location":"East Boulder Community Center - East Turf","city":"Boulder, CO","outOfState":true,"address":"5660 Sioux Dr, Boulder, CO 80303","scoreFor":null,"scoreAgainst":null},{"id":28775,"opponent":"Tulsa Greenwood SC","homeAway":"away","date":"2026-10-24","time":"10:00 AM","tz":"CDT","location":"Ascension St. John Sportsplex - Field 9","city":"Tulsa, OK","outOfState":true,"address":"2925 S Elm Pl, Broken Arrow, OK 74012","scoreFor":null,"scoreAgainst":null},{"id":29203,"opponent":"Real Salt Lake","homeAway":"home","date":"2026-10-31","time":"12:00 PM","tz":"CDT","location":"Soccer Central - Field #2","city":"Home Field","outOfState":false,"address":"6610 Low Bid Lane, San Antonio, TX 78250","scoreFor":null,"scoreAgainst":null},{"id":29616,"opponent":"Houston Rangers","homeAway":"away","date":"2026-11-07","time":"12:00 PM","tz":"CST","location":"Paul D Rushing Park - Field 3","city":"Houston, TX","outOfState":false,"address":"1717 Cullen Blvd, Pearland, TX 77581","scoreFor":null,"scoreAgainst":null},{"id":30502,"opponent":"SGA","homeAway":"home","date":"2026-11-21","time":"10:00 AM","tz":"CST","location":"Soccer Central - Field #2","city":"Home Field","outOfState":false,"address":"6610 Low Bid Lane, San Antonio, TX 78250","scoreFor":null,"scoreAgainst":null},{"id":31259,"opponent":"Dallas Hornets","homeAway":"home","date":"2027-01-23","time":"12:00 PM","tz":"CST","location":"Soccer Central - Field #2","city":"Home Field","outOfState":false,"address":"6610 Low Bid Lane, San Antonio, TX 78250","scoreFor":null,"scoreAgainst":null},{"id":31641,"opponent":"GFI Academy","homeAway":"away","date":"2027-02-06","time":"12:00 PM","tz":"CST","location":"Lenze Rd - Field 1","city":"Texas","outOfState":false,"address":"1500 Lenze Rd, Katy, TX 77493","scoreFor":null,"scoreAgainst":null},{"id":31808,"opponent":"ALBION SC Colorado","homeAway":"home","date":"2027-02-13","time":"10:00 AM","tz":"CST","location":"Soccer Central - Field #2","city":"Home Field","outOfState":false,"address":"6610 Low Bid Lane, San Antonio, TX 78250","scoreFor":null,"scoreAgainst":null},{"id":32324,"opponent":"Real Salt Lake","homeAway":"away","date":"2027-02-21","time":"6:00 AM","tz":"MST","location":"TBD","city":"Utah","outOfState":true,"address":"","scoreFor":null,"scoreAgainst":null},{"id":32538,"opponent":"Austin FC","homeAway":"home","date":"2027-02-27","time":"10:00 AM","tz":"CST","location":"Soccer Central - Field #1","city":"Home Field","outOfState":false,"address":"6610 Low Bid Lane, San Antonio, TX 78250","scoreFor":null,"scoreAgainst":null},{"id":33606,"opponent":"FC Dallas","homeAway":"home","date":"2027-03-14","time":"6:00 AM","tz":"CDT","location":"TBD","city":"Home Field","outOfState":false,"address":"","scoreFor":null,"scoreAgainst":null},{"id":34537,"opponent":"Capital City SC","homeAway":"home","date":"2027-04-03","time":"2:00 PM","tz":"CDT","location":"Soccer Central - Field #3","city":"Home Field","outOfState":false,"address":"6610 Low Bid Lane, San Antonio, TX 78250","scoreFor":null,"scoreAgainst":null},{"id":34981,"opponent":"Dallas Hornets","homeAway":"away","date":"2027-04-10","time":"6:00 AM","tz":"CDT","location":"TBD","city":"Texas","outOfState":false,"address":"","scoreFor":null,"scoreAgainst":null},{"id":35845,"opponent":"SGA","homeAway":"away","date":"2027-04-24","time":"6:00 AM","tz":"CDT","location":"TBD","city":"Texas","outOfState":false,"address":"","scoreFor":null,"scoreAgainst":null},{"id":36302,"opponent":"Tulsa Greenwood SC","homeAway":"home","date":"2027-05-01","time":"10:00 AM","tz":"CDT","location":"Soccer Central - Field #2","city":"Home Field","outOfState":false,"address":"6610 Low Bid Lane, San Antonio, TX 78250","scoreFor":null,"scoreAgainst":null}];
 var pageHTML = function pageHTML(matches) {
   return `<!doctype html>
 <html lang="en">
@@ -276,6 +280,7 @@ var pageHTML = function pageHTML(matches) {
   header.top{ display:flex; flex-direction:column; gap:6px; margin-bottom:22px; }
   .crest-row{ display:flex; align-items:center; gap:12px; justify-content:space-between; }
   .crest-id{ display:flex; align-items:center; gap:12px; }
+  .header-actions{ display:flex; align-items:center; gap:8px; }
   .crest{
     width:44px;height:44px;border-radius:10px;
     background:linear-gradient(160deg, var(--navy), var(--navy-2));
@@ -374,6 +379,8 @@ var pageHTML = function pageHTML(matches) {
   }
   .edit-grid{ display:grid; grid-template-columns:1fr 1fr; gap:10px 12px; }
   .edit-grid .full{ grid-column:1 / -1; }
+  .gh-grid{ display:grid; grid-template-columns:1fr 1fr; gap:10px 12px; }
+  .gh-grid .full{ grid-column:1 / -1; }
   .field{ display:flex; flex-direction:column; gap:4px; }
   .field label{ font-size:11px; font-weight:600; text-transform:uppercase; letter-spacing:0.05em; color:var(--muted); }
   .field input, .field select{
@@ -425,6 +432,7 @@ var pageHTML = function pageHTML(matches) {
     .datebox .day{font-size:21px;}
     .next-body{flex-direction:column; align-items:flex-start;}
     .edit-grid{ grid-template-columns:1fr; }
+    .gh-grid{ grid-template-columns:1fr; }
   }
 </style>
 <body>
@@ -453,11 +461,39 @@ var appMain = function appMain(MATCHES_DATA) {
     canWrite: null,      // null = unknown, true/false once known
     saving: false,
     saveMsg: "",
-    saveMsgKind: ""
+    saveMsgKind: "",
+    github: null,        // {owner, repo, branch, path, token} once connected
+    ghDraft: null,       // in-progress github settings form values
+    showGithubPanel: false
   };
 
   var artifactCap = null;
   var downloadsCap = null;
+
+  var GH_STORAGE_KEY = "acRiverGithubConfig";
+
+  function loadGithubConfig(){
+    try {
+      var raw = window.localStorage && window.localStorage.getItem(GH_STORAGE_KEY);
+      return raw ? JSON.parse(raw) : null;
+    } catch(e){ return null; }
+  }
+
+  function saveGithubConfig(cfg){
+    try { window.localStorage && window.localStorage.setItem(GH_STORAGE_KEY, JSON.stringify(cfg)); } catch(e){}
+  }
+
+  function clearGithubConfig(){
+    try { window.localStorage && window.localStorage.removeItem(GH_STORAGE_KEY); } catch(e){}
+  }
+
+  function utf8ToB64(str){
+    return btoa(unescape(encodeURIComponent(str)));
+  }
+
+  function canEditHere(){
+    return (artifactCap && state.canWrite !== false) || !!(state.github && state.github.token);
+  }
 
   function toUTC(m){
     var parts = m.date.split("-").map(Number);
@@ -526,9 +562,14 @@ var appMain = function appMain(MATCHES_DATA) {
 
     html += '<header class="top">';
     html += '<div class="crest-row"><div class="crest-id"><div class="crest">AC</div><div><h1>AC River U13</h1><p class="subtitle">2026\u2013127 League Schedule</p></div></div>';
-    if(artifactCap && state.canWrite !== false){
+    html += '<div class="header-actions">';
+    if(canEditHere()){
       html += '<button class="icon-btn' + (state.editMode ? ' active' : '') + '" id="editToggle" title="Edit schedule" aria-label="Edit schedule">\u270E</button>';
     }
+    if(!artifactCap){
+      html += '<button class="icon-btn' + (state.github ? ' active' : '') + '" id="githubToggle" title="' + (state.github ? 'GitHub connected \u2014 manage' : 'Connect GitHub to enable editing') + '" aria-label="GitHub settings">\u2699</button>';
+    }
+    html += '</div>';
     html += '</div>';
     var c = counts(decorated);
     html += '<p class="meta-line">' + decorated.length + ' matches \u00b7 ' + c.travel + ' out-of-state \u00b7 updated live from this page</p>';
@@ -538,7 +579,11 @@ var appMain = function appMain(MATCHES_DATA) {
       html += '<div class="notice">You\u2019re viewing a read-only copy of this schedule \u2014 edits here won\u2019t be saved. Ask the page owner to share edit access if you need to make changes.</div>';
     }
 
-    if(!state.editMode){
+    if(state.showGithubPanel){
+      html += renderGithubPanel();
+    }
+
+    if(!state.showGithubPanel && !state.editMode){
       var now = new Date();
       var upcoming = decorated.filter(function(m){return m._utc > now;}).sort(function(a,b){return a._utc-b._utc;})[0];
       if(upcoming){
@@ -549,32 +594,34 @@ var appMain = function appMain(MATCHES_DATA) {
       }
     }
 
-    html += '<div class="toolbar">';
-    html += '<div class="filters" id="filters">';
-    FILTERS.forEach(function(f){
-      html += '<button class="chip' + (state.filter===f.key?' active':'') + '" data-filter="' + f.key + '">' + f.label + ' <span class="count">' + c[f.key] + '</span></button>';
-    });
-    html += '</div>';
-    if(downloadsCap){
-      html += '<button class="ghost-btn" id="downloadCsv">Download CSV</button>';
-    }
-    html += '</div>';
+    if(!state.showGithubPanel){
+      html += '<div class="toolbar">';
+      html += '<div class="filters" id="filters">';
+      FILTERS.forEach(function(f){
+        html += '<button class="chip' + (state.filter===f.key?' active':'') + '" data-filter="' + f.key + '">' + f.label + ' <span class="count">' + c[f.key] + '</span></button>';
+      });
+      html += '</div>';
+      if(downloadsCap){
+        html += '<button class="ghost-btn" id="downloadCsv">Download CSV</button>';
+      }
+      html += '</div>';
 
-    if(state.editMode){
-      html += renderEditList();
-    } else {
-      html += renderViewList(decorated);
-    }
+      if(state.editMode){
+        html += renderEditList();
+      } else {
+        html += renderViewList(decorated);
+      }
 
-    html += '<footer>Times shown in each match\u2019s local timezone (as listed). Away games marked <strong>Travel</strong> are outside Texas. Locations marked TBD will be updated by the league closer to the date.';
-    if(artifactCap && state.canWrite !== false){
-      html += ' Tap the pencil above to add, edit, or remove matches \u2014 changes publish instantly for everyone viewing this page.';
+      html += '<footer>Times shown in each match\u2019s local timezone (as listed). Away games marked <strong>Travel</strong> are outside Texas. Locations marked TBD will be updated by the league closer to the date.';
+      if(canEditHere()){
+        html += ' Tap the pencil above to add, edit, or remove matches \u2014 changes ' + (artifactCap ? 'publish instantly for everyone viewing this page' : 'commit directly to your connected GitHub repo') + '.';
+      }
+      html += '</footer>';
     }
-    html += '</footer>';
 
     html += '</div>'; // wrap
 
-    if(state.editMode){
+    if(state.editMode && !state.showGithubPanel){
       html += '<div class="save-bar' + (state.editMode ? ' show' : '') + '"><div class="save-bar-inner">';
       html += '<div class="save-status' + (state.saveMsgKind ? ' ' + state.saveMsgKind : '') + '">' + esc(state.saveMsg || (decorated.length + ' matches')) + '</div>';
       html += '<div class="btn-row"><button class="btn secondary" id="cancelEdit">Cancel</button><button class="btn primary" id="saveEdit"' + (state.saving?' disabled':'') + '>' + (state.saving ? 'Saving\u2026' : 'Save Changes') + '</button></div>';
@@ -621,7 +668,7 @@ var appMain = function appMain(MATCHES_DATA) {
       if(m._hasScore){
         out += '<span class="score-badge ' + m._result + '">' + m._resultLabel + ' ' + m._scoreLine + '</span>';
       }
-      out += '<div class="time">' + esc(m.time) + ' ' + esc(m.tz) + '</div><div class="mid">ID ' + m.id + '</div></div>';
+      out += '<div class="time">' + esc(m.time) + ' ' + esc(m.tz) + '</div><div class="mid">' + (m.id !== "" && m.id != null ? 'ID ' + m.id : 'ID TBD') + '</div></div>';
       out += '</div>';
     });
     return out;
@@ -666,7 +713,92 @@ var appMain = function appMain(MATCHES_DATA) {
     return out;
   }
 
+  function renderGithubPanel(){
+    var g = state.ghDraft || state.github || {owner:"", repo:"", branch:"main", path:"index.html", token:""};
+    var out = '<div class="edit-card">';
+    out += '<p style="margin:0 0 12px;font-size:13px;color:var(--muted);line-height:1.5;">Connect this page to a GitHub repo so the pencil above can save changes as commits — handy when this page is hosted on GitHub Pages instead of inside Claude. Create a <strong>fine-grained personal access token</strong> scoped to just this one repo with <strong>Contents: Read and write</strong> permission (in GitHub → Settings → Developer settings → Personal access tokens). The token is stored only in this browser’s local storage — it is never sent anywhere except directly to GitHub’s API.</p>';
+    out += '<div class="gh-grid">';
+    out += '<div class="field"><label>Repo owner (username or org)</label><input type="text" id="ghOwner" value="' + esc(g.owner) + '" placeholder="e.g. albertsmith"></div>';
+    out += '<div class="field"><label>Repository name</label><input type="text" id="ghRepo" value="' + esc(g.repo) + '" placeholder="e.g. ac-river-schedule"></div>';
+    out += '<div class="field"><label>Branch</label><input type="text" id="ghBranch" value="' + esc(g.branch || "main") + '" placeholder="main"></div>';
+    out += '<div class="field"><label>File path</label><input type="text" id="ghPath" value="' + esc(g.path || "index.html") + '" placeholder="index.html"></div>';
+    out += '<div class="field full"><label>Personal access token</label><input type="password" id="ghToken" value="' + esc(g.token) + '" placeholder="github_pat_..."></div>';
+    out += '</div>';
+    out += '<div class="edit-row-actions">';
+    out += '<span class="id-badge">' + (state.github ? "Connected to " + esc(state.github.owner) + "/" + esc(state.github.repo) : "Not connected yet") + '</span>';
+    out += '<span class="btn-row">';
+    if(state.github){ out += '<button class="remove-btn" id="ghDisconnect">Disconnect</button>'; }
+    out += '</span>';
+    out += '</div>';
+    out += '</div>';
+    out += '<div class="save-bar show"><div class="save-bar-inner">';
+    out += '<div class="save-status' + (state.saveMsgKind ? ' ' + state.saveMsgKind : '') + '">' + esc(state.saveMsg || "") + '</div>';
+    out += '<div class="btn-row"><button class="btn secondary" id="ghCancel">Close</button><button class="btn primary" id="ghSave">Save Connection</button></div>';
+    out += '</div></div>';
+    return out;
+  }
+
+  function wireGithubToggle(){
+    var ghBtn = document.getElementById("githubToggle");
+    if(ghBtn){
+      ghBtn.addEventListener("click", function(){
+        state.showGithubPanel = true;
+        state.ghDraft = state.github ? Object.assign({}, state.github) : null;
+        state.saveMsg = "";
+        state.saveMsgKind = "";
+        render();
+      });
+    }
+
+    var ghCancel = document.getElementById("ghCancel");
+    if(ghCancel){
+      ghCancel.addEventListener("click", function(){
+        state.showGithubPanel = false;
+        state.ghDraft = null;
+        render();
+      });
+    }
+
+    var ghSave = document.getElementById("ghSave");
+    if(ghSave){
+      ghSave.addEventListener("click", function(){
+        var cfg = {
+          owner: (document.getElementById("ghOwner").value || "").trim(),
+          repo: (document.getElementById("ghRepo").value || "").trim(),
+          branch: (document.getElementById("ghBranch").value || "").trim() || "main",
+          path: (document.getElementById("ghPath").value || "").trim() || "index.html",
+          token: (document.getElementById("ghToken").value || "").trim()
+        };
+        if(!cfg.owner || !cfg.repo || !cfg.token){
+          state.saveMsg = "Owner, repository, and token are all required.";
+          state.saveMsgKind = "err";
+          render();
+          return;
+        }
+        state.github = cfg;
+        saveGithubConfig(cfg);
+        state.showGithubPanel = false;
+        state.ghDraft = null;
+        state.saveMsg = "";
+        state.saveMsgKind = "";
+        render();
+      });
+    }
+
+    var ghDisconnect = document.getElementById("ghDisconnect");
+    if(ghDisconnect){
+      ghDisconnect.addEventListener("click", function(){
+        state.github = null;
+        clearGithubConfig();
+        state.showGithubPanel = false;
+        state.ghDraft = null;
+        render();
+      });
+    }
+  }
+
   function wire(decorated){
+    wireGithubToggle();
     var filtersEl = document.getElementById("filters");
     if(filtersEl){
       filtersEl.querySelectorAll(".chip").forEach(function(btn){
@@ -775,7 +907,7 @@ var appMain = function appMain(MATCHES_DATA) {
       render();
       return;
     }
-    if(!artifactCap){
+    if(!canEditHere()){
       state.saveMsg = "Saving isn\u2019t available in this view.";
       state.saveMsgKind = "err";
       render();
@@ -803,28 +935,90 @@ var appMain = function appMain(MATCHES_DATA) {
       };
     });
 
-    var html = pageHTML(cleaned);
-    artifactCap.publish(html).then(function(){
-      // view reloads automatically on success
-    }).catch(function(e){
-      state.saving = false;
-      if(e && (e.code === "not_writer" || e.code === "not_granted")){
-        state.canWrite = false;
+    if(artifactCap){
+      var html = pageHTML(cleaned);
+      artifactCap.publish(html).then(function(){
+        // view reloads automatically on success
+      }).catch(function(e){
+        state.saving = false;
+        if(e && (e.code === "not_writer" || e.code === "not_granted")){
+          state.canWrite = false;
+          state.editMode = false;
+          state.draft = null;
+          state.saveMsg = "";
+        } else if(e && e.code === "conflict"){
+          state.saveMsg = "Someone else just saved a change \u2014 reloading with the latest version.";
+          state.saveMsgKind = "err";
+        } else {
+          state.saveMsg = (e && e.message) ? e.message : "Couldn\u2019t save \u2014 please try again.";
+          state.saveMsgKind = "err";
+        }
+        render();
+      });
+    } else if(state.github && state.github.token){
+      saveToGithub(cleaned).then(function(){
+        state.saving = false;
         state.editMode = false;
         state.draft = null;
-        state.saveMsg = "";
-      } else if(e && e.code === "conflict"){
-        state.saveMsg = "Someone else just saved a change \u2014 reloading with the latest version.";
+        state.matches = cleaned;
+        state.saveMsg = "Saved to GitHub \u2014 your Pages site will update in about a minute.";
+        state.saveMsgKind = "ok";
+        render();
+      }).catch(function(e){
+        state.saving = false;
+        if(e && e.code === "github_409"){
+          state.saveMsg = "Someone else saved a change first \u2014 reload the page and try again.";
+        } else if(e && e.code === "github_401"){
+          state.saveMsg = "GitHub rejected the token \u2014 check it\u2019s valid and hasn\u2019t expired.";
+        } else if(e && e.code === "github_404"){
+          state.saveMsg = "Couldn\u2019t find that repo, branch, or file path \u2014 check the GitHub settings (gear icon).";
+        } else if(e && e.code === "github_403"){
+          state.saveMsg = "GitHub denied the request \u2014 make sure the token has Contents: Read and write access to this repo.";
+        } else {
+          state.saveMsg = (e && e.message) ? e.message : "Couldn\u2019t save to GitHub \u2014 please try again.";
+        }
         state.saveMsgKind = "err";
-      } else {
-        state.saveMsg = (e && e.message) ? e.message : "Couldn\u2019t save \u2014 please try again.";
-        state.saveMsgKind = "err";
-      }
-      render();
-    });
+        render();
+      });
+    }
+  }
+
+  function saveToGithub(cleanedMatches){
+    var g = state.github;
+    var encodedPath = g.path.split("/").map(encodeURIComponent).join("/");
+    var apiBase = "https://api.github.com/repos/" + encodeURIComponent(g.owner) + "/" + encodeURIComponent(g.repo) + "/contents/" + encodedPath;
+    var headers = {
+      "Authorization": "Bearer " + g.token,
+      "Accept": "application/vnd.github+json"
+    };
+    function toError(res){
+      return res.json().catch(function(){ return {}; }).then(function(body){
+        var e = new Error((body && body.message) || ("GitHub error " + res.status));
+        e.code = "github_" + res.status;
+        throw e;
+      });
+    }
+    return fetch(apiBase + "?ref=" + encodeURIComponent(g.branch), { headers: headers })
+      .then(function(res){ return res.ok ? res.json() : toError(res); })
+      .then(function(fileInfo){
+        var html = pageHTML(cleanedMatches);
+        var putHeaders = Object.assign({"Content-Type": "application/json"}, headers);
+        return fetch(apiBase, {
+          method: "PUT",
+          headers: putHeaders,
+          body: JSON.stringify({
+            message: "Update AC River U13 schedule",
+            content: utf8ToB64(html),
+            sha: fileInfo.sha,
+            branch: g.branch
+          })
+        });
+      })
+      .then(function(res){ return res.ok ? res.json() : toError(res); });
   }
 
   function init(){
+    state.github = loadGithubConfig();
     render();
     if(window.claude && typeof window.claude.use === "function"){
       window.claude.use("artifact").then(function(cap){
