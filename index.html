@@ -136,6 +136,13 @@
   .info .addr{ margin-top:3px; font-size:12px; }
   .info .addr a{ color:var(--muted); text-decoration:underline; text-decoration-color:var(--line); text-underline-offset:2px; }
   .info .addr a:hover{ color:var(--navy-2); text-decoration-color:var(--navy-2); }
+  .watch-link{
+    display:inline-flex; align-items:center; gap:5px; margin-top:8px;
+    padding:4px 11px; border-radius:999px; background:var(--navy); color:#fff;
+    font-size:12px; font-weight:700; text-decoration:none; letter-spacing:0.01em;
+  }
+  .watch-link:hover{ background:var(--navy-2); }
+  .watch-link .play{ font-size:9px; }
   .side{ text-align:right; display:flex; flex-direction:column; align-items:flex-end; gap:4px; }
   .time{ font-weight:700; font-size:14px; color:var(--ink); white-space:nowrap; }
   .mid{ font-size:11px; color:var(--muted); white-space:nowrap; }
@@ -217,7 +224,7 @@
 <body>
 <div id="app"></div>
 <script>
-var MATCHES_DATA = [{"id":"","opponent":"GFI Academy","homeAway":"away","date":"2026-08-30","time":"2:00 PM","tz":"CDT","location":"Hohlt Park","address":"2425 N Park Street, Brenham, TX 77833","city":"Brenham, TX","outOfState":false,"scoreFor":null,"scoreAgainst":null},{"id":26430,"opponent":"Austin FC","homeAway":"away","date":"2026-09-12","time":"10:00 AM","tz":"CDT","location":"St. David's Performance Center – Field 4","city":"Austin, TX","outOfState":false,"address":"5300 Hudson Bend Rd, Austin, TX 78734","scoreFor":null,"scoreAgainst":null},{"id":26862,"opponent":"GFI Academy","homeAway":"home","date":"2026-09-19","time":"2:00 PM","tz":"CDT","location":"Soccer Central - Field #2","city":"Home Field","outOfState":false,"address":"6610 Low Bid Lane, San Antonio, TX 78250","scoreFor":null,"scoreAgainst":null},{"id":27300,"opponent":"Houston Rangers","homeAway":"home","date":"2026-09-26","time":"12:00 PM","tz":"CDT","location":"Soccer Central - Field #2","city":"Home Field","outOfState":false,"address":"6610 Low Bid Lane, San Antonio, TX 78250","scoreFor":null,"scoreAgainst":null},{"id":33814,"opponent":"Capital City SC","homeAway":"away","date":"2026-09-27","time":"3:00 PM","tz":"CDT","location":"1849 Park - Field #2","city":"Texas","outOfState":false,"address":"1849 Ranch Rd 620 S, Austin, TX 78734","scoreFor":null,"scoreAgainst":null},{"id":28279,"opponent":"FC Dallas","homeAway":"away","date":"2026-10-03","time":"3:00 PM","tz":"CDT","location":"Toyota Soccer Center - Field 7","city":"Frisco, TX","outOfState":false,"address":"8207 Kaci Ln, Frisco, TX 75034","scoreFor":null,"scoreAgainst":null},{"id":33180,"opponent":"ALBION SC Colorado","homeAway":"away","date":"2026-10-18","time":"10:00 AM","tz":"MDT","location":"East Boulder Community Center - East Turf","city":"Boulder, CO","outOfState":true,"address":"5660 Sioux Dr, Boulder, CO 80303","scoreFor":null,"scoreAgainst":null},{"id":28775,"opponent":"Tulsa Greenwood SC","homeAway":"away","date":"2026-10-24","time":"10:00 AM","tz":"CDT","location":"Ascension St. John Sportsplex - Field 9","city":"Tulsa, OK","outOfState":true,"address":"2925 S Elm Pl, Broken Arrow, OK 74012","scoreFor":null,"scoreAgainst":null},{"id":29203,"opponent":"Real Salt Lake","homeAway":"home","date":"2026-10-31","time":"12:00 PM","tz":"CDT","location":"Soccer Central - Field #2","city":"Home Field","outOfState":false,"address":"6610 Low Bid Lane, San Antonio, TX 78250","scoreFor":null,"scoreAgainst":null},{"id":29616,"opponent":"Houston Rangers","homeAway":"away","date":"2026-11-07","time":"12:00 PM","tz":"CST","location":"Paul D Rushing Park - Field 3","city":"Houston, TX","outOfState":false,"address":"1717 Cullen Blvd, Pearland, TX 77581","scoreFor":null,"scoreAgainst":null},{"id":30502,"opponent":"SGA","homeAway":"home","date":"2026-11-21","time":"10:00 AM","tz":"CST","location":"Soccer Central - Field #2","city":"Home Field","outOfState":false,"address":"6610 Low Bid Lane, San Antonio, TX 78250","scoreFor":null,"scoreAgainst":null},{"id":31259,"opponent":"Dallas Hornets","homeAway":"home","date":"2027-01-23","time":"12:00 PM","tz":"CST","location":"Soccer Central - Field #2","city":"Home Field","outOfState":false,"address":"6610 Low Bid Lane, San Antonio, TX 78250","scoreFor":null,"scoreAgainst":null},{"id":31641,"opponent":"GFI Academy","homeAway":"away","date":"2027-02-06","time":"12:00 PM","tz":"CST","location":"Lenze Rd - Field 1","city":"Texas","outOfState":false,"address":"1500 Lenze Rd, Katy, TX 77493","scoreFor":null,"scoreAgainst":null},{"id":31808,"opponent":"ALBION SC Colorado","homeAway":"home","date":"2027-02-13","time":"10:00 AM","tz":"CST","location":"Soccer Central - Field #2","city":"Home Field","outOfState":false,"address":"6610 Low Bid Lane, San Antonio, TX 78250","scoreFor":null,"scoreAgainst":null},{"id":32324,"opponent":"Real Salt Lake","homeAway":"away","date":"2027-02-21","time":"6:00 AM","tz":"MST","location":"TBD","city":"Utah","outOfState":true,"address":"","scoreFor":null,"scoreAgainst":null},{"id":32538,"opponent":"Austin FC","homeAway":"home","date":"2027-02-27","time":"10:00 AM","tz":"CST","location":"Soccer Central - Field #1","city":"Home Field","outOfState":false,"address":"6610 Low Bid Lane, San Antonio, TX 78250","scoreFor":null,"scoreAgainst":null},{"id":33606,"opponent":"FC Dallas","homeAway":"home","date":"2027-03-14","time":"6:00 AM","tz":"CDT","location":"TBD","city":"Home Field","outOfState":false,"address":"","scoreFor":null,"scoreAgainst":null},{"id":34537,"opponent":"Capital City SC","homeAway":"home","date":"2027-04-03","time":"2:00 PM","tz":"CDT","location":"Soccer Central - Field #3","city":"Home Field","outOfState":false,"address":"6610 Low Bid Lane, San Antonio, TX 78250","scoreFor":null,"scoreAgainst":null},{"id":34981,"opponent":"Dallas Hornets","homeAway":"away","date":"2027-04-10","time":"6:00 AM","tz":"CDT","location":"TBD","city":"Texas","outOfState":false,"address":"","scoreFor":null,"scoreAgainst":null},{"id":35845,"opponent":"SGA","homeAway":"away","date":"2027-04-24","time":"6:00 AM","tz":"CDT","location":"TBD","city":"Texas","outOfState":false,"address":"","scoreFor":null,"scoreAgainst":null},{"id":36302,"opponent":"Tulsa Greenwood SC","homeAway":"home","date":"2027-05-01","time":"10:00 AM","tz":"CDT","location":"Soccer Central - Field #2","city":"Home Field","outOfState":false,"address":"6610 Low Bid Lane, San Antonio, TX 78250","scoreFor":null,"scoreAgainst":null}];
+var MATCHES_DATA = [{"id":"","opponent":"GFI Academy","homeAway":"away","date":"2026-08-30","time":"2:00 PM","tz":"CDT","location":"Hohlt Park","address":"2425 N Park Street, Brenham, TX 77833","city":"Brenham, TX","outOfState":false,"scoreFor":null,"scoreAgainst":null,"videoUrl":"https://youtu.be/Sek4QUhuF4A"},{"id":26430,"opponent":"Austin FC","homeAway":"away","date":"2026-09-12","time":"10:00 AM","tz":"CDT","location":"St. David's Performance Center – Field 4","address":"5300 Hudson Bend Rd, Austin, TX 78734","city":"Austin, TX","outOfState":false,"scoreFor":null,"scoreAgainst":null,"videoUrl":""},{"id":26862,"opponent":"GFI Academy","homeAway":"home","date":"2026-09-19","time":"2:00 PM","tz":"CDT","location":"Soccer Central - Field #2","address":"6610 Low Bid Lane, San Antonio, TX 78250","city":"Home Field","outOfState":false,"scoreFor":null,"scoreAgainst":null,"videoUrl":""},{"id":27300,"opponent":"Houston Rangers","homeAway":"home","date":"2026-09-26","time":"12:00 PM","tz":"CDT","location":"Soccer Central - Field #2","address":"6610 Low Bid Lane, San Antonio, TX 78250","city":"Home Field","outOfState":false,"scoreFor":null,"scoreAgainst":null,"videoUrl":""},{"id":33814,"opponent":"Capital City SC","homeAway":"away","date":"2026-09-27","time":"3:00 PM","tz":"CDT","location":"1849 Park - Field #2","address":"1849 Ranch Rd 620 S, Austin, TX 78734","city":"Texas","outOfState":false,"scoreFor":null,"scoreAgainst":null,"videoUrl":""},{"id":28279,"opponent":"FC Dallas","homeAway":"away","date":"2026-10-03","time":"3:00 PM","tz":"CDT","location":"Toyota Soccer Center - Field 7","address":"8207 Kaci Ln, Frisco, TX 75034","city":"Frisco, TX","outOfState":false,"scoreFor":null,"scoreAgainst":null,"videoUrl":""},{"id":33180,"opponent":"ALBION SC Colorado","homeAway":"away","date":"2026-10-18","time":"10:00 AM","tz":"MDT","location":"East Boulder Community Center - East Turf","address":"5660 Sioux Dr, Boulder, CO 80303","city":"Boulder, CO","outOfState":true,"scoreFor":null,"scoreAgainst":null,"videoUrl":""},{"id":28775,"opponent":"Tulsa Greenwood SC","homeAway":"away","date":"2026-10-24","time":"10:00 AM","tz":"CDT","location":"Ascension St. John Sportsplex - Field 9","address":"2925 S Elm Pl, Broken Arrow, OK 74012","city":"Tulsa, OK","outOfState":true,"scoreFor":null,"scoreAgainst":null,"videoUrl":""},{"id":29203,"opponent":"Real Salt Lake","homeAway":"home","date":"2026-10-31","time":"12:00 PM","tz":"CDT","location":"Soccer Central - Field #2","address":"6610 Low Bid Lane, San Antonio, TX 78250","city":"Home Field","outOfState":false,"scoreFor":null,"scoreAgainst":null,"videoUrl":""},{"id":29616,"opponent":"Houston Rangers","homeAway":"away","date":"2026-11-07","time":"12:00 PM","tz":"CST","location":"Paul D Rushing Park - Field 3","address":"1717 Cullen Blvd, Pearland, TX 77581","city":"Houston, TX","outOfState":false,"scoreFor":null,"scoreAgainst":null,"videoUrl":""},{"id":30502,"opponent":"SGA","homeAway":"home","date":"2026-11-21","time":"10:00 AM","tz":"CST","location":"Soccer Central - Field #2","address":"6610 Low Bid Lane, San Antonio, TX 78250","city":"Home Field","outOfState":false,"scoreFor":null,"scoreAgainst":null,"videoUrl":""},{"id":31259,"opponent":"Dallas Hornets","homeAway":"home","date":"2027-01-23","time":"12:00 PM","tz":"CST","location":"Soccer Central - Field #2","address":"6610 Low Bid Lane, San Antonio, TX 78250","city":"Home Field","outOfState":false,"scoreFor":null,"scoreAgainst":null,"videoUrl":""},{"id":31641,"opponent":"GFI Academy","homeAway":"away","date":"2027-02-06","time":"12:00 PM","tz":"CST","location":"Lenze Rd - Field 1","address":"1500 Lenze Rd, Katy, TX 77493","city":"Texas","outOfState":false,"scoreFor":null,"scoreAgainst":null,"videoUrl":""},{"id":31808,"opponent":"ALBION SC Colorado","homeAway":"home","date":"2027-02-13","time":"10:00 AM","tz":"CST","location":"Soccer Central - Field #2","address":"6610 Low Bid Lane, San Antonio, TX 78250","city":"Home Field","outOfState":false,"scoreFor":null,"scoreAgainst":null,"videoUrl":""},{"id":32324,"opponent":"Real Salt Lake","homeAway":"away","date":"2027-02-21","time":"6:00 AM","tz":"MST","location":"TBD","address":"","city":"Utah","outOfState":true,"scoreFor":null,"scoreAgainst":null,"videoUrl":""},{"id":32538,"opponent":"Austin FC","homeAway":"home","date":"2027-02-27","time":"10:00 AM","tz":"CST","location":"Soccer Central - Field #1","address":"6610 Low Bid Lane, San Antonio, TX 78250","city":"Home Field","outOfState":false,"scoreFor":null,"scoreAgainst":null,"videoUrl":""},{"id":33606,"opponent":"FC Dallas","homeAway":"home","date":"2027-03-14","time":"6:00 AM","tz":"CDT","location":"TBD","address":"","city":"Home Field","outOfState":false,"scoreFor":null,"scoreAgainst":null,"videoUrl":""},{"id":34537,"opponent":"Capital City SC","homeAway":"home","date":"2027-04-03","time":"2:00 PM","tz":"CDT","location":"Soccer Central - Field #3","address":"6610 Low Bid Lane, San Antonio, TX 78250","city":"Home Field","outOfState":false,"scoreFor":null,"scoreAgainst":null,"videoUrl":""},{"id":34981,"opponent":"Dallas Hornets","homeAway":"away","date":"2027-04-10","time":"6:00 AM","tz":"CDT","location":"TBD","address":"","city":"Texas","outOfState":false,"scoreFor":null,"scoreAgainst":null,"videoUrl":""},{"id":35845,"opponent":"SGA","homeAway":"away","date":"2027-04-24","time":"6:00 AM","tz":"CDT","location":"TBD","address":"","city":"Texas","outOfState":false,"scoreFor":null,"scoreAgainst":null,"videoUrl":""},{"id":36302,"opponent":"Tulsa Greenwood SC","homeAway":"home","date":"2027-05-01","time":"10:00 AM","tz":"CDT","location":"Soccer Central - Field #2","address":"6610 Low Bid Lane, San Antonio, TX 78250","city":"Home Field","outOfState":false,"scoreFor":null,"scoreAgainst":null,"videoUrl":""}];
 var pageHTML = function pageHTML(matches) {
   return `<!doctype html>
 <html lang="en">
@@ -357,6 +364,13 @@ var pageHTML = function pageHTML(matches) {
   .info .addr{ margin-top:3px; font-size:12px; }
   .info .addr a{ color:var(--muted); text-decoration:underline; text-decoration-color:var(--line); text-underline-offset:2px; }
   .info .addr a:hover{ color:var(--navy-2); text-decoration-color:var(--navy-2); }
+  .watch-link{
+    display:inline-flex; align-items:center; gap:5px; margin-top:8px;
+    padding:4px 11px; border-radius:999px; background:var(--navy); color:#fff;
+    font-size:12px; font-weight:700; text-decoration:none; letter-spacing:0.01em;
+  }
+  .watch-link:hover{ background:var(--navy-2); }
+  .watch-link .play{ font-size:9px; }
   .side{ text-align:right; display:flex; flex-direction:column; align-items:flex-end; gap:4px; }
   .time{ font-weight:700; font-size:14px; color:var(--ink); white-space:nowrap; }
   .mid{ font-size:11px; color:var(--muted); white-space:nowrap; }
@@ -663,6 +677,9 @@ var appMain = function appMain(MATCHES_DATA) {
       if(m.address && m.address.trim()){
         out += '<div class="addr"><a href="https://maps.google.com/?q=' + encodeURIComponent(m.address) + '" target="_blank" rel="noopener">' + esc(m.address) + '</a></div>';
       }
+      if(m.videoUrl && m.videoUrl.trim()){
+        out += '<div><a class="watch-link" href="' + esc(m.videoUrl) + '" target="_blank" rel="noopener"><span class="play">▶</span>Watch Footage</a></div>';
+      }
       out += '</div>';
       out += '<div class="side">';
       if(m._hasScore){
@@ -692,6 +709,7 @@ var appMain = function appMain(MATCHES_DATA) {
       out += selectField("Out of state?", "outOfState", m.outOfState ? "yes" : "no", i, [["no","No \u2014 in Texas"],["yes","Yes \u2014 travel required"]]);
       out += field("AC River score", "number", "scoreFor", m.scoreFor, i, "e.g. 3");
       out += field("Opponent score", "number", "scoreAgainst", m.scoreAgainst, i, "e.g. 1");
+      out += field("Game footage (YouTube link)", "text", "videoUrl", m.videoUrl, i, "https://youtu.be/... (unlisted is fine)", "full");
       out += '</div>';
       out += '<div class="edit-row-actions"><span class="id-badge">Row ' + (i+1) + '</span><button class="remove-btn" data-remove="' + i + '">Remove match</button></div>';
       out += '</div>';
@@ -716,7 +734,7 @@ var appMain = function appMain(MATCHES_DATA) {
   function renderGithubPanel(){
     var g = state.ghDraft || state.github || {owner:"", repo:"", branch:"main", path:"index.html", token:""};
     var out = '<div class="edit-card">';
-    out += '<p style="margin:0 0 12px;font-size:13px;color:var(--muted);line-height:1.5;">Connect this page to a GitHub repo so the pencil above can save changes as commits. Create a <strong>fine-grained personal access token</strong> scoped to just this one repo with <strong>Contents: Read and write</strong> permission (in GitHub → Settings → Developer settings → Personal access tokens). The token is stored only in this browser’s local storage — it is never sent anywhere except directly to GitHub’s API.</p>';
+    out += '<p style="margin:0 0 12px;font-size:13px;color:var(--muted);line-height:1.5;">Connect this page to a GitHub repo so the pencil above can save changes as commits — handy when this page is hosted on GitHub Pages instead of inside Claude. Create a <strong>fine-grained personal access token</strong> scoped to just this one repo with <strong>Contents: Read and write</strong> permission (in GitHub → Settings → Developer settings → Personal access tokens). The token is stored only in this browser’s local storage — it is never sent anywhere except directly to GitHub’s API.</p>';
     out += '<div class="gh-grid">';
     out += '<div class="field"><label>Repo owner (username or org)</label><input type="text" id="ghOwner" value="' + esc(g.owner) + '" placeholder="e.g. albertsmith"></div>';
     out += '<div class="field"><label>Repository name</label><input type="text" id="ghRepo" value="' + esc(g.repo) + '" placeholder="e.g. ac-river-schedule"></div>';
@@ -840,7 +858,7 @@ var appMain = function appMain(MATCHES_DATA) {
         state.draft.push({
           id: "", opponent: "", homeAway: "home", date: "", time: "", tz: "CDT",
           location: "", address: "", city: "", outOfState: false,
-          scoreFor: null, scoreAgainst: null
+          scoreFor: null, scoreAgainst: null, videoUrl: ""
         });
         render();
       });
@@ -874,9 +892,9 @@ var appMain = function appMain(MATCHES_DATA) {
 
   function downloadCsv(){
     if(!downloadsCap) return;
-    var rows = [["Match ID","Home","Away","Date","Time","Timezone","Location","Address","City/State","Out of State","AC River Score","Opponent Score","Result"]];
+    var rows = [["Match ID","Home","Away","Date","Time","Timezone","Location","Address","City/State","Out of State","AC River Score","Opponent Score","Result","Game Footage"]];
     decorate(state.matches).sort(function(a,b){return a._utc-b._utc;}).forEach(function(m){
-      rows.push([m.id, m.home, m.away, m.date, m.time, m.tz, m.location, m.address || "", m.city, m.outOfState ? "Yes" : "No", m.scoreFor==null?"":m.scoreFor, m.scoreAgainst==null?"":m.scoreAgainst, m._hasScore ? m._resultLabel : ""]);
+      rows.push([m.id, m.home, m.away, m.date, m.time, m.tz, m.location, m.address || "", m.city, m.outOfState ? "Yes" : "No", m.scoreFor==null?"":m.scoreFor, m.scoreAgainst==null?"":m.scoreAgainst, m._hasScore ? m._resultLabel : "", m.videoUrl || ""]);
     });
     var csv = rows.map(function(r){
       return r.map(function(v){
@@ -931,7 +949,8 @@ var appMain = function appMain(MATCHES_DATA) {
         city: (m.city || "").trim(),
         outOfState: !!m.outOfState,
         scoreFor: (m.scoreFor === "" || m.scoreFor === undefined) ? null : m.scoreFor,
-        scoreAgainst: (m.scoreAgainst === "" || m.scoreAgainst === undefined) ? null : m.scoreAgainst
+        scoreAgainst: (m.scoreAgainst === "" || m.scoreAgainst === undefined) ? null : m.scoreAgainst,
+        videoUrl: (m.videoUrl || "").trim()
       };
     });
 
@@ -1030,6 +1049,15 @@ var appMain = function appMain(MATCHES_DATA) {
         if(cap) render();
       });
     }
+    // "Next Match" depends on the current time, not just the data — re-check
+    // periodically so a tab left open overnight advances on its own once a
+    // game's kickoff passes, without needing a manual refresh or click.
+    setInterval(function(){
+      if(!state.editMode && !state.showGithubPanel){ render(); }
+    }, 60000);
+    document.addEventListener("visibilitychange", function(){
+      if(document.visibilityState === "visible" && !state.editMode && !state.showGithubPanel){ render(); }
+    });
   }
 
   init();
