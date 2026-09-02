@@ -9,42 +9,16 @@
 <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Libre+Franklin:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
   :root{
-    --bg:#f5f3ee; --surface:#ffffff; --surface-2:#eeece4;
-    --ink:#1a2133; --muted:#5b6274;
-    --navy:#182a4d; --navy-2:#24406f;
-    --red:#b93b34;
-    --gold:#a8701e; --gold-bg:#f7ecd8; --gold-line:#e3cd9c;
-    --line:#e2ded2;
-    --shadow: 0 1px 2px rgba(24,30,50,0.04), 0 8px 24px -12px rgba(24,30,50,0.12);
-    --home-bg:#eaf0f6; --home-line:#c9d9ea; --home-ink:#1c4a7a;
-    --ok-bg:#e9f4ea; --ok-line:#bfdec4; --ok-ink:#276437;
-    --err-bg:#fbeceb; --err-line:#f0c4c0; --err-ink:#9a3229;
-  }
-  @media (prefers-color-scheme: dark){
-    :root:not([data-theme="light"]){
-      --bg:#11151f; --surface:#181d2b; --surface-2:#1f2536;
-      --ink:#e9ebf2; --muted:#9aa2b8;
-      --navy:#8fb0ea; --navy-2:#a9c4f4;
-      --red:#e2776e;
-      --gold:#e0ac5c; --gold-bg:#2c2517; --gold-line:#4a3c22;
-      --line:#2a3247;
-      --shadow: 0 1px 2px rgba(0,0,0,0.3), 0 8px 24px -12px rgba(0,0,0,0.5);
-      --home-bg:#182838; --home-line:#2b4966; --home-ink:#9cc4ee;
-      --ok-bg:#182a1e; --ok-line:#2e4c37; --ok-ink:#8fd39e;
-      --err-bg:#2c1a19; --err-line:#4c2b28; --err-ink:#e8a29b;
-    }
-  }
-  :root[data-theme="dark"]{
-    --bg:#11151f; --surface:#181d2b; --surface-2:#1f2536;
-    --ink:#e9ebf2; --muted:#9aa2b8;
-    --navy:#8fb0ea; --navy-2:#a9c4f4;
-    --red:#e2776e;
-    --gold:#e0ac5c; --gold-bg:#2c2517; --gold-line:#4a3c22;
-    --line:#2a3247;
-    --shadow: 0 1px 2px rgba(0,0,0,0.3), 0 8px 24px -12px rgba(0,0,0,0.5);
-    --home-bg:#182838; --home-line:#2b4966; --home-ink:#9cc4ee;
-    --ok-bg:#182a1e; --ok-line:#2e4c37; --ok-ink:#8fd39e;
-    --err-bg:#2c1a19; --err-line:#4c2b28; --err-ink:#e8a29b;
+    --bg:#06101d; --surface:#0f1e33; --surface-2:#16294a;
+    --ink:#ffffff; --muted:#aab4c8;
+    --navy:#7fa8e8; --navy-2:#9dbdf0;
+    --red:#ff5b56; --red-2:#ff8380;
+    --gold:#e6ac4d; --gold-bg:#2e2413; --gold-line:#4f3f20;
+    --line:#243252;
+    --shadow: 0 1px 2px rgba(0,0,0,0.35), 0 8px 24px -12px rgba(0,0,0,0.55);
+    --home-bg:#152840; --home-line:#2c4a70; --home-ink:#a8cdf5;
+    --ok-bg:#152a1e; --ok-line:#2c4c37; --ok-ink:#9be0ab;
+    --err-bg:#2e1917; --err-line:#4f2b28; --err-ink:#ff9a92;
   }
   *{box-sizing:border-box;}
   html,body{margin:0;padding:0;}
@@ -60,13 +34,6 @@
   .crest-row{ display:flex; align-items:center; gap:12px; justify-content:space-between; }
   .crest-id{ display:flex; align-items:center; gap:12px; }
   .header-actions{ display:flex; align-items:center; gap:8px; }
-  .crest{
-    width:44px;height:44px;border-radius:10px;
-    background:linear-gradient(160deg, var(--navy), var(--navy-2));
-    display:flex;align-items:center;justify-content:center;
-    color:#fff;font-family:"Oswald",sans-serif;font-weight:600;font-size:15px;
-    flex:none; box-shadow:var(--shadow);
-  }
   h1{
     font-family:"Oswald", ui-sans-serif, sans-serif; font-weight:600;
     font-size:clamp(24px,5vw,32px); margin:0; text-wrap:balance; color:var(--ink);
@@ -81,18 +48,12 @@
   }
   .icon-btn:hover{ color:var(--ink); border-color:var(--navy-2); }
   .icon-btn.active{ background:var(--navy); border-color:var(--navy); color:#fff; }
-  .next-card{
-    margin-top:18px; background:var(--surface); border:1px solid var(--line);
-    border-radius:16px; padding:16px 18px; box-shadow:var(--shadow); display:none;
-  }
-  .next-card.show{display:block;}
+  .next-wrap{ margin-top:18px; }
   .next-label{
     font-family:"Oswald",sans-serif; text-transform:uppercase; letter-spacing:0.12em;
-    font-size:11px; color:var(--red); font-weight:600; margin-bottom:6px;
+    font-size:11px; color:var(--red); font-weight:600; margin-bottom:8px;
   }
-  .next-body{ display:flex; align-items:baseline; justify-content:space-between; gap:12px; flex-wrap:wrap; }
-  .next-teams{ font-family:"Oswald",sans-serif; font-size:19px; font-weight:500; color:var(--ink); }
-  .next-when{ color:var(--muted); font-size:13.5px; }
+  .match.next{ border:2px solid var(--red); box-shadow:var(--shadow), 0 0 0 1px rgba(255,91,86,0.12); }
   .toolbar{ display:flex; gap:8px; flex-wrap:wrap; margin:22px 0 8px; align-items:center; justify-content:space-between; }
   .filters{ display:flex; gap:8px; flex-wrap:wrap; }
   .chip{
@@ -138,10 +99,10 @@
   .info .addr a:hover{ color:var(--navy-2); text-decoration-color:var(--navy-2); }
   .watch-link{
     display:inline-flex; align-items:center; gap:5px; margin-top:8px;
-    padding:4px 11px; border-radius:999px; background:var(--navy); color:#fff;
+    padding:4px 11px; border-radius:999px; background:var(--red); color:#fff;
     font-size:12px; font-weight:700; text-decoration:none; letter-spacing:0.01em;
   }
-  .watch-link:hover{ background:var(--navy-2); }
+  .watch-link:hover{ background:var(--red-2); }
   .watch-link .play{ font-size:9px; }
   .side{ text-align:right; display:flex; flex-direction:column; align-items:flex-end; gap:4px; }
   .time{ font-weight:700; font-size:14px; color:var(--ink); white-space:nowrap; }
@@ -216,7 +177,6 @@
   @media (max-width:420px){
     .match{grid-template-columns:48px 1fr auto; padding:12px 10px; gap:10px;}
     .datebox .day{font-size:21px;}
-    .next-body{flex-direction:column; align-items:flex-start;}
     .edit-grid{ grid-template-columns:1fr; }
     .gh-grid{ grid-template-columns:1fr; }
   }
@@ -224,7 +184,7 @@
 <body>
 <div id="app"></div>
 <script>
-var MATCHES_DATA = [{"id":"","opponent":"GFI Academy","homeAway":"away","date":"2026-08-30","time":"2:00 PM","tz":"CDT","location":"Hohlt Park","address":"2425 N Park Street, Brenham, TX 77833","city":"Brenham, TX","outOfState":false,"scoreFor":1,"scoreAgainst":1,"videoUrl":"https://www.youtube.com/watch?v=aC4cPO08GpQ"},{"id":26430,"opponent":"Austin FC","homeAway":"away","date":"2026-09-12","time":"10:00 AM","tz":"CDT","location":"St. David's Performance Center – Field 4","address":"5300 Hudson Bend Rd, Austin, TX 78734","city":"Austin, TX","outOfState":false,"scoreFor":null,"scoreAgainst":null,"videoUrl":""},{"id":26862,"opponent":"GFI Academy","homeAway":"home","date":"2026-09-19","time":"2:00 PM","tz":"CDT","location":"Soccer Central - Field #2","address":"6610 Low Bid Lane, San Antonio, TX 78250","city":"Home Field","outOfState":false,"scoreFor":null,"scoreAgainst":null,"videoUrl":""},{"id":27300,"opponent":"Houston Rangers","homeAway":"home","date":"2026-09-26","time":"12:00 PM","tz":"CDT","location":"Soccer Central - Field #2","address":"6610 Low Bid Lane, San Antonio, TX 78250","city":"Home Field","outOfState":false,"scoreFor":null,"scoreAgainst":null,"videoUrl":""},{"id":33814,"opponent":"Capital City SC","homeAway":"away","date":"2026-09-27","time":"3:00 PM","tz":"CDT","location":"1849 Park - Field #2","address":"1849 Ranch Rd 620 S, Austin, TX 78734","city":"Texas","outOfState":false,"scoreFor":null,"scoreAgainst":null,"videoUrl":""},{"id":28279,"opponent":"FC Dallas","homeAway":"away","date":"2026-10-03","time":"3:00 PM","tz":"CDT","location":"Toyota Soccer Center - Field 7","address":"8207 Kaci Ln, Frisco, TX 75034","city":"Frisco, TX","outOfState":false,"scoreFor":null,"scoreAgainst":null,"videoUrl":""},{"id":33180,"opponent":"ALBION SC Colorado","homeAway":"away","date":"2026-10-18","time":"10:00 AM","tz":"MDT","location":"East Boulder Community Center - East Turf","address":"5660 Sioux Dr, Boulder, CO 80303","city":"Boulder, CO","outOfState":true,"scoreFor":null,"scoreAgainst":null,"videoUrl":""},{"id":28775,"opponent":"Tulsa Greenwood SC","homeAway":"away","date":"2026-10-24","time":"10:00 AM","tz":"CDT","location":"Ascension St. John Sportsplex - Field 9","address":"2925 S Elm Pl, Broken Arrow, OK 74012","city":"Tulsa, OK","outOfState":true,"scoreFor":null,"scoreAgainst":null,"videoUrl":""},{"id":29203,"opponent":"Real Salt Lake","homeAway":"home","date":"2026-10-31","time":"12:00 PM","tz":"CDT","location":"Soccer Central - Field #2","address":"6610 Low Bid Lane, San Antonio, TX 78250","city":"Home Field","outOfState":false,"scoreFor":null,"scoreAgainst":null,"videoUrl":""},{"id":29616,"opponent":"Houston Rangers","homeAway":"away","date":"2026-11-07","time":"12:00 PM","tz":"CST","location":"Paul D Rushing Park - Field 3","address":"1717 Cullen Blvd, Pearland, TX 77581","city":"Houston, TX","outOfState":false,"scoreFor":null,"scoreAgainst":null,"videoUrl":""},{"id":30502,"opponent":"SGA","homeAway":"home","date":"2026-11-21","time":"10:00 AM","tz":"CST","location":"Soccer Central - Field #2","address":"6610 Low Bid Lane, San Antonio, TX 78250","city":"Home Field","outOfState":false,"scoreFor":null,"scoreAgainst":null,"videoUrl":""},{"id":31259,"opponent":"Dallas Hornets","homeAway":"home","date":"2027-01-23","time":"12:00 PM","tz":"CST","location":"Soccer Central - Field #2","address":"6610 Low Bid Lane, San Antonio, TX 78250","city":"Home Field","outOfState":false,"scoreFor":null,"scoreAgainst":null,"videoUrl":""},{"id":31641,"opponent":"GFI Academy","homeAway":"away","date":"2027-02-06","time":"12:00 PM","tz":"CST","location":"Lenze Rd - Field 1","address":"1500 Lenze Rd, Katy, TX 77493","city":"Texas","outOfState":false,"scoreFor":null,"scoreAgainst":null,"videoUrl":""},{"id":31808,"opponent":"ALBION SC Colorado","homeAway":"home","date":"2027-02-13","time":"10:00 AM","tz":"CST","location":"Soccer Central - Field #2","address":"6610 Low Bid Lane, San Antonio, TX 78250","city":"Home Field","outOfState":false,"scoreFor":null,"scoreAgainst":null,"videoUrl":""},{"id":32324,"opponent":"Real Salt Lake","homeAway":"away","date":"2027-02-21","time":"6:00 AM","tz":"MST","location":"TBD","address":"","city":"Utah","outOfState":true,"scoreFor":null,"scoreAgainst":null,"videoUrl":""},{"id":32538,"opponent":"Austin FC","homeAway":"home","date":"2027-02-27","time":"10:00 AM","tz":"CST","location":"Soccer Central - Field #1","address":"6610 Low Bid Lane, San Antonio, TX 78250","city":"Home Field","outOfState":false,"scoreFor":null,"scoreAgainst":null,"videoUrl":""},{"id":33606,"opponent":"FC Dallas","homeAway":"home","date":"2027-03-14","time":"6:00 AM","tz":"CDT","location":"TBD","address":"","city":"Home Field","outOfState":false,"scoreFor":null,"scoreAgainst":null,"videoUrl":""},{"id":34537,"opponent":"Capital City SC","homeAway":"home","date":"2027-04-03","time":"2:00 PM","tz":"CDT","location":"Soccer Central - Field #3","address":"6610 Low Bid Lane, San Antonio, TX 78250","city":"Home Field","outOfState":false,"scoreFor":null,"scoreAgainst":null,"videoUrl":""},{"id":34981,"opponent":"Dallas Hornets","homeAway":"away","date":"2027-04-10","time":"6:00 AM","tz":"CDT","location":"TBD","address":"","city":"Texas","outOfState":false,"scoreFor":null,"scoreAgainst":null,"videoUrl":""},{"id":35845,"opponent":"SGA","homeAway":"away","date":"2027-04-24","time":"6:00 AM","tz":"CDT","location":"TBD","address":"","city":"Texas","outOfState":false,"scoreFor":null,"scoreAgainst":null,"videoUrl":""},{"id":36302,"opponent":"Tulsa Greenwood SC","homeAway":"home","date":"2027-05-01","time":"10:00 AM","tz":"CDT","location":"Soccer Central - Field #2","address":"6610 Low Bid Lane, San Antonio, TX 78250","city":"Home Field","outOfState":false,"scoreFor":null,"scoreAgainst":null,"videoUrl":""}];
+var MATCHES_DATA = [{"id":"","opponent":"GFI Academy","homeAway":"away","date":"2026-08-30","time":"2:00 PM","tz":"CDT","location":"Hohlt Park","address":"2425 N Park Street, Brenham, TX 77833","city":"Brenham, TX","outOfState":false,"scoreFor":null,"scoreAgainst":null,"videoUrl":""},{"id":26430,"opponent":"Austin FC","homeAway":"away","date":"2026-09-12","time":"10:00 AM","tz":"CDT","location":"St. David's Performance Center – Field 4","city":"Austin, TX","outOfState":false,"address":"5300 Hudson Bend Rd, Austin, TX 78734","scoreFor":null,"scoreAgainst":null,"videoUrl":""},{"id":26862,"opponent":"GFI Academy","homeAway":"home","date":"2026-09-19","time":"2:00 PM","tz":"CDT","location":"Soccer Central - Field #2","city":"Home Field","outOfState":false,"address":"6610 Low Bid Lane, San Antonio, TX 78250","scoreFor":null,"scoreAgainst":null,"videoUrl":""},{"id":27300,"opponent":"Houston Rangers","homeAway":"home","date":"2026-09-26","time":"12:00 PM","tz":"CDT","location":"Soccer Central - Field #2","city":"Home Field","outOfState":false,"address":"6610 Low Bid Lane, San Antonio, TX 78250","scoreFor":null,"scoreAgainst":null,"videoUrl":""},{"id":33814,"opponent":"Capital City SC","homeAway":"away","date":"2026-09-27","time":"3:00 PM","tz":"CDT","location":"1849 Park - Field #2","city":"Texas","outOfState":false,"address":"1849 Ranch Rd 620 S, Austin, TX 78734","scoreFor":null,"scoreAgainst":null,"videoUrl":""},{"id":28279,"opponent":"FC Dallas","homeAway":"away","date":"2026-10-03","time":"3:00 PM","tz":"CDT","location":"Toyota Soccer Center - Field 7","city":"Frisco, TX","outOfState":false,"address":"8207 Kaci Ln, Frisco, TX 75034","scoreFor":null,"scoreAgainst":null,"videoUrl":""},{"id":33180,"opponent":"ALBION SC Colorado","homeAway":"away","date":"2026-10-18","time":"10:00 AM","tz":"MDT","location":"East Boulder Community Center - East Turf","city":"Boulder, CO","outOfState":true,"address":"5660 Sioux Dr, Boulder, CO 80303","scoreFor":null,"scoreAgainst":null,"videoUrl":""},{"id":28775,"opponent":"Tulsa Greenwood SC","homeAway":"away","date":"2026-10-24","time":"10:00 AM","tz":"CDT","location":"Ascension St. John Sportsplex - Field 9","city":"Tulsa, OK","outOfState":true,"address":"2925 S Elm Pl, Broken Arrow, OK 74012","scoreFor":null,"scoreAgainst":null,"videoUrl":""},{"id":29203,"opponent":"Real Salt Lake","homeAway":"home","date":"2026-10-31","time":"12:00 PM","tz":"CDT","location":"Soccer Central - Field #2","city":"Home Field","outOfState":false,"address":"6610 Low Bid Lane, San Antonio, TX 78250","scoreFor":null,"scoreAgainst":null,"videoUrl":""},{"id":29616,"opponent":"Houston Rangers","homeAway":"away","date":"2026-11-07","time":"12:00 PM","tz":"CST","location":"Paul D Rushing Park - Field 3","city":"Houston, TX","outOfState":false,"address":"1717 Cullen Blvd, Pearland, TX 77581","scoreFor":null,"scoreAgainst":null,"videoUrl":""},{"id":30502,"opponent":"SGA","homeAway":"home","date":"2026-11-21","time":"10:00 AM","tz":"CST","location":"Soccer Central - Field #2","city":"Home Field","outOfState":false,"address":"6610 Low Bid Lane, San Antonio, TX 78250","scoreFor":null,"scoreAgainst":null,"videoUrl":""},{"id":31259,"opponent":"Dallas Hornets","homeAway":"home","date":"2027-01-23","time":"12:00 PM","tz":"CST","location":"Soccer Central - Field #2","city":"Home Field","outOfState":false,"address":"6610 Low Bid Lane, San Antonio, TX 78250","scoreFor":null,"scoreAgainst":null,"videoUrl":""},{"id":31641,"opponent":"GFI Academy","homeAway":"away","date":"2027-02-06","time":"12:00 PM","tz":"CST","location":"Lenze Rd - Field 1","city":"Texas","outOfState":false,"address":"1500 Lenze Rd, Katy, TX 77493","scoreFor":null,"scoreAgainst":null,"videoUrl":""},{"id":31808,"opponent":"ALBION SC Colorado","homeAway":"home","date":"2027-02-13","time":"10:00 AM","tz":"CST","location":"Soccer Central - Field #2","city":"Home Field","outOfState":false,"address":"6610 Low Bid Lane, San Antonio, TX 78250","scoreFor":null,"scoreAgainst":null,"videoUrl":""},{"id":32324,"opponent":"Real Salt Lake","homeAway":"away","date":"2027-02-21","time":"6:00 AM","tz":"MST","location":"TBD","city":"Utah","outOfState":true,"address":"","scoreFor":null,"scoreAgainst":null,"videoUrl":""},{"id":32538,"opponent":"Austin FC","homeAway":"home","date":"2027-02-27","time":"10:00 AM","tz":"CST","location":"Soccer Central - Field #1","city":"Home Field","outOfState":false,"address":"6610 Low Bid Lane, San Antonio, TX 78250","scoreFor":null,"scoreAgainst":null,"videoUrl":""},{"id":33606,"opponent":"FC Dallas","homeAway":"home","date":"2027-03-14","time":"6:00 AM","tz":"CDT","location":"TBD","city":"Home Field","outOfState":false,"address":"","scoreFor":null,"scoreAgainst":null,"videoUrl":""},{"id":34537,"opponent":"Capital City SC","homeAway":"home","date":"2027-04-03","time":"2:00 PM","tz":"CDT","location":"Soccer Central - Field #3","city":"Home Field","outOfState":false,"address":"6610 Low Bid Lane, San Antonio, TX 78250","scoreFor":null,"scoreAgainst":null,"videoUrl":""},{"id":34981,"opponent":"Dallas Hornets","homeAway":"away","date":"2027-04-10","time":"6:00 AM","tz":"CDT","location":"TBD","city":"Texas","outOfState":false,"address":"","scoreFor":null,"scoreAgainst":null,"videoUrl":""},{"id":35845,"opponent":"SGA","homeAway":"away","date":"2027-04-24","time":"6:00 AM","tz":"CDT","location":"TBD","city":"Texas","outOfState":false,"address":"","scoreFor":null,"scoreAgainst":null,"videoUrl":""},{"id":36302,"opponent":"Tulsa Greenwood SC","homeAway":"home","date":"2027-05-01","time":"10:00 AM","tz":"CDT","location":"Soccer Central - Field #2","city":"Home Field","outOfState":false,"address":"6610 Low Bid Lane, San Antonio, TX 78250","scoreFor":null,"scoreAgainst":null,"videoUrl":""}];
 var pageHTML = function pageHTML(matches) {
   return `<!doctype html>
 <html lang="en">
@@ -237,42 +197,16 @@ var pageHTML = function pageHTML(matches) {
 <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Libre+Franklin:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
   :root{
-    --bg:#f5f3ee; --surface:#ffffff; --surface-2:#eeece4;
-    --ink:#1a2133; --muted:#5b6274;
-    --navy:#182a4d; --navy-2:#24406f;
-    --red:#b93b34;
-    --gold:#a8701e; --gold-bg:#f7ecd8; --gold-line:#e3cd9c;
-    --line:#e2ded2;
-    --shadow: 0 1px 2px rgba(24,30,50,0.04), 0 8px 24px -12px rgba(24,30,50,0.12);
-    --home-bg:#eaf0f6; --home-line:#c9d9ea; --home-ink:#1c4a7a;
-    --ok-bg:#e9f4ea; --ok-line:#bfdec4; --ok-ink:#276437;
-    --err-bg:#fbeceb; --err-line:#f0c4c0; --err-ink:#9a3229;
-  }
-  @media (prefers-color-scheme: dark){
-    :root:not([data-theme="light"]){
-      --bg:#11151f; --surface:#181d2b; --surface-2:#1f2536;
-      --ink:#e9ebf2; --muted:#9aa2b8;
-      --navy:#8fb0ea; --navy-2:#a9c4f4;
-      --red:#e2776e;
-      --gold:#e0ac5c; --gold-bg:#2c2517; --gold-line:#4a3c22;
-      --line:#2a3247;
-      --shadow: 0 1px 2px rgba(0,0,0,0.3), 0 8px 24px -12px rgba(0,0,0,0.5);
-      --home-bg:#182838; --home-line:#2b4966; --home-ink:#9cc4ee;
-      --ok-bg:#182a1e; --ok-line:#2e4c37; --ok-ink:#8fd39e;
-      --err-bg:#2c1a19; --err-line:#4c2b28; --err-ink:#e8a29b;
-    }
-  }
-  :root[data-theme="dark"]{
-    --bg:#11151f; --surface:#181d2b; --surface-2:#1f2536;
-    --ink:#e9ebf2; --muted:#9aa2b8;
-    --navy:#8fb0ea; --navy-2:#a9c4f4;
-    --red:#e2776e;
-    --gold:#e0ac5c; --gold-bg:#2c2517; --gold-line:#4a3c22;
-    --line:#2a3247;
-    --shadow: 0 1px 2px rgba(0,0,0,0.3), 0 8px 24px -12px rgba(0,0,0,0.5);
-    --home-bg:#182838; --home-line:#2b4966; --home-ink:#9cc4ee;
-    --ok-bg:#182a1e; --ok-line:#2e4c37; --ok-ink:#8fd39e;
-    --err-bg:#2c1a19; --err-line:#4c2b28; --err-ink:#e8a29b;
+    --bg:#06101d; --surface:#0f1e33; --surface-2:#16294a;
+    --ink:#ffffff; --muted:#aab4c8;
+    --navy:#7fa8e8; --navy-2:#9dbdf0;
+    --red:#ff5b56; --red-2:#ff8380;
+    --gold:#e6ac4d; --gold-bg:#2e2413; --gold-line:#4f3f20;
+    --line:#243252;
+    --shadow: 0 1px 2px rgba(0,0,0,0.35), 0 8px 24px -12px rgba(0,0,0,0.55);
+    --home-bg:#152840; --home-line:#2c4a70; --home-ink:#a8cdf5;
+    --ok-bg:#152a1e; --ok-line:#2c4c37; --ok-ink:#9be0ab;
+    --err-bg:#2e1917; --err-line:#4f2b28; --err-ink:#ff9a92;
   }
   *{box-sizing:border-box;}
   html,body{margin:0;padding:0;}
@@ -288,13 +222,6 @@ var pageHTML = function pageHTML(matches) {
   .crest-row{ display:flex; align-items:center; gap:12px; justify-content:space-between; }
   .crest-id{ display:flex; align-items:center; gap:12px; }
   .header-actions{ display:flex; align-items:center; gap:8px; }
-  .crest{
-    width:44px;height:44px;border-radius:10px;
-    background:linear-gradient(160deg, var(--navy), var(--navy-2));
-    display:flex;align-items:center;justify-content:center;
-    color:#fff;font-family:"Oswald",sans-serif;font-weight:600;font-size:15px;
-    flex:none; box-shadow:var(--shadow);
-  }
   h1{
     font-family:"Oswald", ui-sans-serif, sans-serif; font-weight:600;
     font-size:clamp(24px,5vw,32px); margin:0; text-wrap:balance; color:var(--ink);
@@ -309,18 +236,12 @@ var pageHTML = function pageHTML(matches) {
   }
   .icon-btn:hover{ color:var(--ink); border-color:var(--navy-2); }
   .icon-btn.active{ background:var(--navy); border-color:var(--navy); color:#fff; }
-  .next-card{
-    margin-top:18px; background:var(--surface); border:1px solid var(--line);
-    border-radius:16px; padding:16px 18px; box-shadow:var(--shadow); display:none;
-  }
-  .next-card.show{display:block;}
+  .next-wrap{ margin-top:18px; }
   .next-label{
     font-family:"Oswald",sans-serif; text-transform:uppercase; letter-spacing:0.12em;
-    font-size:11px; color:var(--red); font-weight:600; margin-bottom:6px;
+    font-size:11px; color:var(--red); font-weight:600; margin-bottom:8px;
   }
-  .next-body{ display:flex; align-items:baseline; justify-content:space-between; gap:12px; flex-wrap:wrap; }
-  .next-teams{ font-family:"Oswald",sans-serif; font-size:19px; font-weight:500; color:var(--ink); }
-  .next-when{ color:var(--muted); font-size:13.5px; }
+  .match.next{ border:2px solid var(--red); box-shadow:var(--shadow), 0 0 0 1px rgba(255,91,86,0.12); }
   .toolbar{ display:flex; gap:8px; flex-wrap:wrap; margin:22px 0 8px; align-items:center; justify-content:space-between; }
   .filters{ display:flex; gap:8px; flex-wrap:wrap; }
   .chip{
@@ -366,10 +287,10 @@ var pageHTML = function pageHTML(matches) {
   .info .addr a:hover{ color:var(--navy-2); text-decoration-color:var(--navy-2); }
   .watch-link{
     display:inline-flex; align-items:center; gap:5px; margin-top:8px;
-    padding:4px 11px; border-radius:999px; background:var(--navy); color:#fff;
+    padding:4px 11px; border-radius:999px; background:var(--red); color:#fff;
     font-size:12px; font-weight:700; text-decoration:none; letter-spacing:0.01em;
   }
-  .watch-link:hover{ background:var(--navy-2); }
+  .watch-link:hover{ background:var(--red-2); }
   .watch-link .play{ font-size:9px; }
   .side{ text-align:right; display:flex; flex-direction:column; align-items:flex-end; gap:4px; }
   .time{ font-weight:700; font-size:14px; color:var(--ink); white-space:nowrap; }
@@ -444,7 +365,6 @@ var pageHTML = function pageHTML(matches) {
   @media (max-width:420px){
     .match{grid-template-columns:48px 1fr auto; padding:12px 10px; gap:10px;}
     .datebox .day{font-size:21px;}
-    .next-body{flex-direction:column; align-items:flex-start;}
     .edit-grid{ grid-template-columns:1fr; }
     .gh-grid{ grid-template-columns:1fr; }
   }
@@ -575,7 +495,7 @@ var appMain = function appMain(MATCHES_DATA) {
     html += '<div class="wrap">';
 
     html += '<header class="top">';
-    html += '<div class="crest-row"><div class="crest-id"><div class="crest">AC</div><div><h1>AC River U13</h1><p class="subtitle">2026\u2013127 League Schedule</p></div></div>';
+    html += '<div class="crest-row"><div class="crest-id"><div><h1>AC River MLS NEXT Homegrown U13</h1><p class="subtitle">2026-27 League Schedule</p></div></div>';
     html += '<div class="header-actions">';
     if(canEditHere()){
       html += '<button class="icon-btn' + (state.editMode ? ' active' : '') + '" id="editToggle" title="Edit schedule" aria-label="Edit schedule">\u270E</button>';
@@ -601,10 +521,9 @@ var appMain = function appMain(MATCHES_DATA) {
       var now = new Date();
       var upcoming = decorated.filter(function(m){return m._utc > now;}).sort(function(a,b){return a._utc-b._utc;})[0];
       if(upcoming){
-        var haWord = upcoming._isHome ? "vs" : "at";
-        html += '<div class="next-card show"><div class="next-label">Next Match</div><div class="next-body">';
-        html += '<div class="next-teams">AC River ' + haWord + ' ' + esc(upcoming.opponent) + '</div>';
-        html += '<div class="next-when">' + fmtWhen(upcoming) + '</div></div></div>';
+        html += '<div class="next-wrap"><div class="next-label">Next Match</div>';
+        html += renderMatchCard(upcoming, {showScore:false, showVideo:false, extraClass:"next"});
+        html += '</div>';
       }
     }
 
@@ -668,26 +587,34 @@ var appMain = function appMain(MATCHES_DATA) {
         lastMonth = key;
         out += '<div class="month-heading">' + MONTH_FULL[d.getUTCMonth()] + ' ' + d.getUTCFullYear() + '</div>';
       }
-      var travelTag = m.outOfState ? '<span class="tag travel">Travel</span>' : '';
-      var haTag = m._isHome ? '<span class="tag home">Home</span>' : '<span class="tag away">Away</span>';
-      out += '<div class="match">';
-      out += '<div class="datebox"><div class="dow">' + DOW[d.getUTCDay()] + '</div><div class="day">' + d.getUTCDate() + '</div><div class="mon">' + MON[d.getUTCMonth()] + '</div></div>';
-      out += '<div class="info"><div class="teams">vs ' + esc(m.opponent) + ' ' + haTag + ' ' + travelTag + '</div>';
-      out += '<div class="sub"><span>' + esc(m.location) + '</span><span class="dot">\u00b7</span><span>' + esc(m.city) + '</span></div>';
-      if(m.address && m.address.trim()){
-        out += '<div class="addr"><a href="https://maps.google.com/?q=' + encodeURIComponent(m.address) + '" target="_blank" rel="noopener">' + esc(m.address) + '</a></div>';
-      }
-      if(m.videoUrl && m.videoUrl.trim()){
-        out += '<div><a class="watch-link" href="' + esc(m.videoUrl) + '" target="_blank" rel="noopener"><span class="play">▶</span>Watch Footage</a></div>';
-      }
-      out += '</div>';
-      out += '<div class="side">';
-      if(m._hasScore){
-        out += '<span class="score-badge ' + m._result + '">' + m._resultLabel + ' ' + m._scoreLine + '</span>';
-      }
-      out += '<div class="time">' + esc(m.time) + ' ' + esc(m.tz) + '</div><div class="mid">' + (m.id !== "" && m.id != null ? 'ID ' + m.id : 'ID TBD') + '</div></div>';
-      out += '</div>';
+      out += renderMatchCard(m);
     });
+    return out;
+  }
+
+  function renderMatchCard(m, opts){
+    opts = opts || {};
+    var d = m._utc;
+    var travelTag = m.outOfState ? '<span class="tag travel">Travel</span>' : '';
+    var haTag = m._isHome ? '<span class="tag home">Home</span>' : '<span class="tag away">Away</span>';
+    var cls = "match" + (opts.extraClass ? " " + opts.extraClass : "");
+    var out = '<div class="' + cls + '">';
+    out += '<div class="datebox"><div class="dow">' + DOW[d.getUTCDay()] + '</div><div class="day">' + d.getUTCDate() + '</div><div class="mon">' + MON[d.getUTCMonth()] + '</div></div>';
+    out += '<div class="info"><div class="teams">vs ' + esc(m.opponent) + ' ' + haTag + ' ' + travelTag + '</div>';
+    out += '<div class="sub"><span>' + esc(m.location) + '</span><span class="dot">\u00b7</span><span>' + esc(m.city) + '</span></div>';
+    if(m.address && m.address.trim()){
+      out += '<div class="addr"><a href="https://maps.google.com/?q=' + encodeURIComponent(m.address) + '" target="_blank" rel="noopener">' + esc(m.address) + '</a></div>';
+    }
+    if(opts.showVideo !== false && m.videoUrl && m.videoUrl.trim()){
+      out += '<div><a class="watch-link" href="' + esc(m.videoUrl) + '" target="_blank" rel="noopener"><span class="play">▶</span>Watch Footage</a></div>';
+    }
+    out += '</div>';
+    out += '<div class="side">';
+    if(opts.showScore !== false && m._hasScore){
+      out += '<span class="score-badge ' + m._result + '">' + m._resultLabel + ' ' + m._scoreLine + '</span>';
+    }
+    out += '<div class="time">' + esc(m.time) + ' ' + esc(m.tz) + '</div><div class="mid">' + (m.id !== "" && m.id != null ? 'ID ' + m.id : 'ID TBD') + '</div></div>';
+    out += '</div>';
     return out;
   }
 
